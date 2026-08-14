@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ExperienceUnit 审核工作流原型</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>🧭 ExperienceUnit v0.2 人工审核原型</h1>
+    <p class="subtitle">
+      样本：<code>{{ sample_dir }}</code> · 输出：<code>{{ output_path }}</code>
+    </p>
+  </header>
+
+  <nav class="stats">
+    <div class="stat"><span class="stat-num">{{ total }}</span><span class="stat-label">总单元</span></div>
+    <div class="stat"><span class="stat-num">{{ review_count }}</span><span class="stat-label">待审锚点</span></div>
+    <div class="stat draft"><span class="stat-num">{{ stats.draft }}</span><span class="stat-label">未审核</span></div>
+    <div class="stat reviewed"><span class="stat-num">{{ stats.reviewed }}</span><span class="stat-label">已审草稿</span></div>
+    <div class="stat approved"><span class="stat-num">{{ stats.approved }}</span><span class="stat-label">已通过</span></div>
+    <div class="stat rejected"><span class="stat-num">{{ stats.rejected }}</span><span class="stat-label">已拒绝</span></div>
+  </nav>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">全部</button>
+    <button class="filter-btn" data-filter="draft">未审核</button>
+    <button class="filter-btn" data-filter="reviewed">已审草稿</button>
+    <button class="filter-btn" data-filter="approved">已通过</button>
+    <button class="filter-btn" data-filter="rejected">已拒绝</button>
+  </div>
+
+  <form action="/api/reload" method="post" class="reload-form">
+    <button type="submit">↻ 重新加载原始数据</button>
+  </form>
+
+  <main class="unit-list">
+    {% for unit in units %}
+    {% set decision = decisions.get(unit.decision_id, {}) %}
+    {% set anchors = anchors_by_unit.get(unit.unit_id, []) %}
+    {% set anchors = anchors_by_unit.get(unit.unit_id, []) %}
+    <article class="unit-card status-{{ unit.review_status }} {% if anchors %}has-anchor{% endif %}" data-status="{{ unit.review_status }}">
+      <div class="unit-header">
+        <div class="unit-id">{{ unit.unit_id }}{% if anchors %}<span class="anchor-badge">⚠️ 待审锚点</span>{% endif %}</div>
+        <div class="status-badge {{ unit.review_status }}">{{ unit.review_status }}</div>
+      </div>
+
+      <h3 class="unit-title">{{ decision.title or unit.decision_id }}</h3>
+      <p class="unit-meta">
+        <span class="tag">{{ decision.category or '—' }}</span>
+        <span class="tag">{{ unit.entry_points[0].label if unit.entry_points else '—' }}</span>
+        <span class="tag">{{ (unit.git_evidence_ids | length) }} 个 Git 证据</span>
+      </p>
+
+      {% if anchors %}
+      <div class="anchors">
+        <h4>⚠️ 需要人工确认的锚点</h4>
+        <ul>
+          {% for anchor in anchors %}
+          <li>{{ anchor.reason }}{% if anchor.anchor_uuid %} · <code>{{ anchor.anchor_uuid[:8] }}</code>{% endif %}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <div class="note-box">
+        <label>审核备注</label>
+        <textarea id="note-{{ unit.unit_id }}" rows="2" placeholder="记录通过/拒绝的理由，或补充说明…">{{ unit.reviewer_notes }}</textarea>
+      </div>
+
+      <div class="actions">
+        <button class="btn approve" onclick="act('{{ unit.unit_id }}', 'approve')">✅ 通过</button>
+        <button class="btn reject" onclick="act('{{ unit.unit_id }}', 'reject')">❌ 拒绝</button>
+        <button class="btn edit" onclick="act('{{ unit.unit_id }}', 'edit')">📝 保存备注</button>
+      </div>
+
+      <footer class="unit-footer">
+        更新于 {{ unit.updated_at }}
+      </footer>
+    </article>
+    {% endfor %}
+  </main>
+
+  <footer class="page-footer">
+    <p>
+      状态机：<code>draft → reviewed → approved|rejected</code> ·
+      详见 <a href="/api/state">/api/state</a>
+    </p>
+  </footer>
+
+  <script>
+    async function act(unitId, action) {
+      const noteEl = document.getElementById('note-' + unitId);
+      const note = noteEl ? noteEl.value : '';
+      if (action === 'reject' && !note.trim()) {
+        if (!confirm('拒绝建议填写理由。确定继续拒绝吗？')) return;
+      }
+      let url = '/api/units/' + unitId + '/' + action;
+      let opts = { method: 'POST' };
+      if (action === 'edit') {
+        const body = new URLSearchParams();
+        body.append('note', note);
+        opts.body = body;
+        opts.headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+      }
+      const res = await fetch(url, opts);
+      if (res.ok) {
+        window.location.reload();
+      } else {
+        const data = await res.json();
+        alert('操作失败：' + (data.error || res.statusText));
+      }
+    }
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.unit-card').forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.status === filter) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
