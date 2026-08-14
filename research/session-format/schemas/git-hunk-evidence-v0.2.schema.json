@@ -1,45 +1,48 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/git-evidence-v0.2.schema.json",
-  "title": "AI Collaboration Experience Package - Git Evidence v0.2",
-  "description": "Code change evidence pointing to a commit, file, or hunk. Prototype / v0.2.",
+  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/git-hunk-evidence-v0.2.schema.json",
+  "title": "AI Collaboration Experience Package - Git Hunk Evidence v0.2",
+  "description": "Hunk-level code change evidence. Splits out from GitEvidence so one file evidence can produce multiple hunk evidences. Prototype / v0.2.",
   "type": "object",
   "required": [
     "evidence_id",
     "commit_sha",
     "parent_commit_sha",
-    "kind",
     "file_path",
-    "code_ref"
+    "hunk_index",
+    "hunk",
+    "code_ref",
+    "alignment_quality"
   ],
   "properties": {
     "evidence_id": {
       "type": "string",
-      "pattern": "^git-[0-9a-f]{7,40}-[a-z0-9_.-]+$",
-      "description": "Globally unique git evidence identifier"
+      "pattern": "^git-hunk-[0-9a-f]{7,40}-[a-z0-9_.-]+-[0-9]+$",
+      "description": "Globally unique hunk evidence identifier"
     },
     "commit_sha": {
       "type": "string",
       "pattern": "^[0-9a-f]{7,40}$",
-      "description": "Commit SHA where the change appears"
+      "description": "Commit SHA where the hunk appears"
     },
     "parent_commit_sha": {
       "type": "string",
       "pattern": "^[0-9a-f]{7,40}$",
       "description": "Parent commit SHA for diff context"
     },
-    "kind": {
-      "type": "string",
-      "enum": ["commit", "file"],
-      "description": "Granularity of the evidence (hunk-level evidence lives in GitHunkEvidence schema)"
-    },
     "file_path": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "File path within the repository"
+    },
+    "hunk_index": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Zero-based index of the hunk within the file diff"
     },
     "diff_command": {
       "type": "string",
-      "description": "Shell command to reproduce the diff"
+      "description": "Shell command to reproduce the hunk in context"
     },
     "code_ref": {
       "type": "string",
@@ -54,14 +57,19 @@
         "new_start": { "type": "integer", "minimum": 1 },
         "old_lines": { "type": "integer", "minimum": 0 },
         "new_lines": { "type": "integer", "minimum": 0 },
-        "header": { "type": "string", "minLength": 1 },
+        "header": { "type": "string", "minLength": 0 },
         "lines": { "type": "string" }
       },
       "additionalProperties": false
     },
     "notes": {
       "type": "string",
-      "description": "Explanation of why this evidence relates to the decision"
+      "description": "Explanation of why this hunk relates to the decision"
+    },
+    "alignment_quality": {
+      "type": "string",
+      "enum": ["manual", "heuristic", "inferred"],
+      "description": "How the hunk was matched to the decision"
     }
   },
   "additionalProperties": false

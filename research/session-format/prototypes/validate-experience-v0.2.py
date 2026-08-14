@@ -91,6 +91,7 @@ def main() -> None:
         "tag": load_schema("tag-v0.2.schema.json"),
         "session_fragment": load_schema("session-fragment-v0.2.schema.json"),
         "git_evidence": load_schema("git-evidence-v0.2.schema.json"),
+        "git_hunk_evidence": load_schema("git-hunk-evidence-v0.2.schema.json"),
         "decision_point": load_schema("decision-point-v0.2.schema.json"),
         "experience_unit": load_schema("experience-unit-v0.2.schema.json"),
         "course_module": load_schema("course-module-v0.2.schema.json"),
@@ -101,6 +102,7 @@ def main() -> None:
     tags_data = load_json(SAMPLE_DIR / "tags-v0.2.json")
     session_fragments = load_jsonl(SAMPLE_DIR / "session-fragments-v0.2.jsonl")
     git_evidences = load_jsonl(SAMPLE_DIR / "git-evidence-v0.2.jsonl")
+    git_hunk_evidences = load_jsonl(SAMPLE_DIR / "git-hunk-evidence-v0.2.jsonl")
     decision_points = load_jsonl(SAMPLE_DIR / "decision-points-v0.2.jsonl")
     experience_units = load_jsonl(SAMPLE_DIR / "experience-units-v0.2.jsonl")
     course_modules = load_json(SAMPLE_DIR / "course-modules-v0.2.json")
@@ -157,6 +159,14 @@ def main() -> None:
         for e in errs:
             errors.append(f"git-evidence line {line_no}: {e}")
 
+    hunk_evidence_ids = check_unique(git_hunk_evidences, "evidence_id", "git-hunk-evidence-v0.2.jsonl")
+    for line_no, ev in git_hunk_evidences:
+        if "__json_error__" in ev:
+            continue
+        errs = validate_with_schema(schema_validators["git_hunk_evidence"], ev)
+        for e in errs:
+            errors.append(f"git-hunk-evidence line {line_no}: {e}")
+
     decision_ids = check_unique(decision_points, "id", "decision-points-v0.2.jsonl")
     for line_no, dp in decision_points:
         if "__json_error__" in dp:
@@ -189,6 +199,7 @@ def main() -> None:
     print(f"- Experience units: {len(unit_ids)}")
     print(f"- Session fragments: {len(fragment_ids)}")
     print(f"- Git evidences: {len(evidence_ids)}")
+    print(f"- Git hunk evidences: {len(hunk_evidence_ids)}")
     print(f"- Course modules: {len(module_ids)}")
     print(f"- Learning paths: {len(path_ids)}")
     print()
@@ -207,6 +218,9 @@ def main() -> None:
         for eid in unit.get("git_evidence_ids", []):
             if eid not in evidence_ids:
                 errors.append(f"experience-units line {line_no}: git_evidence_id '{eid}' not found")
+        for hid in unit.get("git_hunk_evidence_ids", []):
+            if hid not in hunk_evidence_ids:
+                errors.append(f"experience-units line {line_no}: git_hunk_evidence_id '{hid}' not found")
         for tid in unit.get("tag_ids", []):
             if tid not in tag_axis_by_id:
                 errors.append(f"experience-units line {line_no}: tag_id '{tid}' not in taxonomy")
@@ -229,6 +243,9 @@ def main() -> None:
         for eid in dp.get("git_evidence_ids", []):
             if eid not in evidence_ids:
                 errors.append(f"decision-points line {line_no}: git_evidence_id '{eid}' not found")
+        for hid in dp.get("git_hunk_evidence_ids", []):
+            if hid not in hunk_evidence_ids:
+                errors.append(f"decision-points line {line_no}: git_hunk_evidence_id '{hid}' not found")
         for tid in dp.get("tag_ids", []):
             if tid not in tag_axis_by_id:
                 errors.append(f"decision-points line {line_no}: tag_id '{tid}' not in taxonomy")
@@ -245,8 +262,8 @@ def main() -> None:
             if mid not in module_ids:
                 errors.append(f"learning-paths item {i}: module_id '{mid}' not found")
 
-    print("- Checked unit → decision/fragment/evidence/tag/module/path links")
-    print("- Checked decision → unit/fragment/evidence/tag links")
+    print("- Checked unit → decision/fragment/evidence/hunk_evidence/tag/module/path links")
+    print("- Checked decision → unit/fragment/evidence/hunk_evidence/tag links")
     print("- Checked module/path → unit/module links\n")
 
     # Session UUID reality
@@ -276,7 +293,16 @@ def main() -> None:
             missing_files += 1
             warnings.append(f"git-evidence line {line_no}: file_path '{fp}' not in git-alignment changed_files/key_files")
 
+    for line_no, ev in git_hunk_evidences:
+        if "__json_error__" in ev:
+            continue
+        fp = ev.get("file_path")
+        if fp and fp not in allowed_git_files:
+            missing_files += 1
+            warnings.append(f"git-hunk-evidence line {line_no}: file_path '{fp}' not in git-alignment changed_files/key_files")
+
     print(f"- Git evidence files: {len(evidence_ids)}")
+    print(f"- Git hunk evidence files: {len(hunk_evidence_ids)}")
     print(f"- Files outside git-alignment: {missing_files}\n")
 
     # Dual entry
@@ -301,6 +327,7 @@ def main() -> None:
         SAMPLE_DIR / "tags-v0.2.json",
         SAMPLE_DIR / "session-fragments-v0.2.jsonl",
         SAMPLE_DIR / "git-evidence-v0.2.jsonl",
+        SAMPLE_DIR / "git-hunk-evidence-v0.2.jsonl",
         SAMPLE_DIR / "decision-points-v0.2.jsonl",
         SAMPLE_DIR / "experience-units-v0.2.jsonl",
         SAMPLE_DIR / "course-modules-v0.2.json",

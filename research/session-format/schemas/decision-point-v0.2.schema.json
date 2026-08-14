@@ -106,6 +106,14 @@
         "pattern": "^git-[0-9a-f]{7,40}-[a-z0-9_.-]+$"
       }
     },
+    "git_hunk_evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^git-hunk-[0-9a-f]{7,40}-[a-z0-9_.-]+-[0-9]+$"
+      },
+      "description": "Hunk-level code evidence associated with this decision"
+    },
     "tag_ids": {
       "type": "array",
       "items": {
