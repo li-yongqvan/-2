@@ -1,0 +1,166 @@
+---
+import Base from '../../layouts/Base.astro';
+import Timeline from '../../components/Timeline.astro';
+import DiffViewer from '../../components/DiffViewer.astro';
+import {
+  experienceUnits,
+  unitDecision,
+  unitFragments,
+  unitHunks,
+  tagLabel,
+  moduleTitle,
+  formatDate,
+} from '../../data/loader.ts';
+
+export function getStaticPaths() {
+  return experienceUnits.map((unit) => ({
+    params: { id: unit.unit_id },
+    props: { unit },
+  }));
+}
+
+const { unit } = Astro.props;
+const decision = unitDecision(unit);
+const fragments = unitFragments(unit);
+const hunks = unitHunks(unit);
+---
+
+<Base title={decision?.title ?? unit.unit_id}>
+  <div class="detail-header">
+    <span class={`status-badge status-${unit.review_status}`}>{unit.review_status}</span>
+    <h1>{decision?.title ?? unit.unit_id}</h1>
+    <p class="detail-question">{decision?.question ?? ''}</p>
+  </div>
+
+  <section class="detail-meta">
+    <div>
+      <strong>ID:</strong> {unit.unit_id}
+    </div>
+    <div>
+      <strong>决策:</strong> {decision?.selected_option ?? '—'}
+    </div>
+    <div>
+      <strong>时间:</strong> {formatDate(unit.created_at)}
+    </div>
+    <div>
+      <strong>标签:</strong>
+      {unit.tag_ids.map((id) => (
+        <span class="tag-pill">{tagLabel(id)}</span>
+      ))}
+    </div>
+    {
+      unit.course_module_ids.length > 0 && (
+        <div>
+          <strong>模块:</strong>
+          {unit.course_module_ids.map((id) => (
+            <span class="module-pill">{moduleTitle(id)}</span>
+          ))}
+        </div>
+      )
+    }
+  </section>
+
+  <div class="detail-columns">
+    <!-- 左栏：对话片段 -->
+    <section class="detail-col">
+      <h2>对话片段</h2>
+      <Timeline units={experienceUnits} currentUnitId={unit.unit_id} />
+
+      {
+        fragments.length === 0 && <p class="empty-state">无关联对话片段。</p>
+      }
+
+      {
+        fragments.map((frag) => (
+          <article class="fragment-card">
+            <div class="fragment-header">
+              <strong>{frag.fragment_id}</strong>
+              <span class="fragment-quality">{frag.alignment_quality}</span>
+            </div>
+            <p>{frag.summary}</p>
+            <div class="fragment-meta">
+              <span>参与者: {frag.participants.join(', ')}</span>
+              {frag.includes_subagent && <span class="subagent-badge">含子代理</span>}
+            </div>
+            <div class="fragment-messages">
+              <span>消息 UUID:</span>
+              <code>{frag.anchor_message_uuid}</code>
+            </div>
+          </article>
+        ))
+      }
+    </section>
+
+    <!-- 中栏：代码 diff -->
+    <section class="detail-col">
+      <h2>代码 diff</h2>
+      <DiffViewer hunks={hunks} />
+    </section>
+
+    <!-- 右栏：方法说明 -->
+    <section class="detail-col">
+      <h2>方法说明</h2>
+      {
+        decision ? (
+          <div class="method-card">
+            <h3>决策结论</h3>
+            <p><strong>{decision.selected_option}</strong></p>
+            <p>{decision.rationale}</p>
+
+            <h3>选项对比</h3>
+            <ul class="options-list">
+              {decision.options.map((opt) => (
+                <li class={opt.label === decision.selected_option ? 'selected-option' : ''}>
+                  <strong>{opt.label}</strong> — {opt.consequence}
+                </li>
+              ))}
+            </ul>
+
+            {
+              decision.affected_files.length > 0 && (
+                <>
+                  <h3>影响文件</h3>
+                  <ul class="file-list">
+                    {decision.affected_files.map((f) => (
+                      <li><code>{f}</code></li>
+                    ))}
+                  </ul>
+                </>
+              )
+            }
+
+            {decision.unresolved_tail && (
+              <>
+                <h3>未解决的尾巴</h3>
+                <p>{decision.unresolved_tail}</p>
+              </>
+            )}
+          </div>
+        ) : (
+          <p class="empty-state">未找到对应决策点。</p>
+        )
+      }
+
+      <div class="method-card">
+        <h3>入口点</h3>
+        <ul class="entry-list">
+          {unit.entry_points.map((ep) => (
+            <li>
+              <span class="entry-type">{ep.type}</span>
+              {ep.label} · <code>{ep.tag_id}</code>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {
+        unit.reviewer_notes && (
+          <div class="method-card">
+            <h3>审核备注</h3>
+            <p>{unit.reviewer_notes}</p>
+          </div>
+        )
+      }
+    </section>
+  </div>
+</Base>
