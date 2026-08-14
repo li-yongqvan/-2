@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/decision-point-v0.1.schema.json",
+  "title": "AI Collaboration Experience Package - Decision Point v0.1",
+  "description": "Intermediate data structure for a single decision point extracted from human-AI collaboration sessions. Prototype / v0.1 - derived from cyber-game M8-M9 sample.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "category",
+    "category_en",
+    "source",
+    "source_type",
+    "question",
+    "options",
+    "selected_option",
+    "rationale",
+    "affected_files",
+    "unresolved_tail",
+    "timestamp",
+    "related_commit"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-[0-9]+$",
+      "description": "Globally unique decision point identifier, e.g. cyber-game-m9-001"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Short human-readable decision title"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "任务定义",
+        "方法选择",
+        "范围取舍",
+        "上下文注入",
+        "提示精炼",
+        "约束声明",
+        "方向修正",
+        "验收/终止"
+      ],
+      "description": "Decision category in Chinese (8-type taxonomy from #5)"
+    },
+    "category_en": {
+      "type": "string",
+      "enum": [
+        "task_definition",
+        "method_selection",
+        "scope_tradeoff",
+        "context_injection",
+        "prompt_refinement",
+        "constraint_declaration",
+        "course_correction",
+        "acceptance_termination"
+      ],
+      "description": "Decision category in English snake_case"
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Path or identifier of the source document where the decision was recorded"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["grilling", "grilling-qa"],
+      "description": "Type of source artifact that produced the decision point"
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The decision question being asked"
+    },
+    "options": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["label", "consequence"],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Option label, often prefixed with A/B/C/D"
+          },
+          "consequence": {
+            "type": "string",
+            "description": "Expected consequence if this option is selected"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Candidate options for the decision"
+    },
+    "selected_option": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The option that was selected. May include extra clarification beyond the label."
+    },
+    "rationale": {
+      "type": "string",
+      "description": "Why the selected option was chosen"
+    },
+    "affected_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Files impacted by this decision"
+    },
+    "unresolved_tail": {
+      "type": "string",
+      "description": "Follow-up concern or deferred work left unresolved"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp when the decision was made"
+    },
+    "related_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,40}$",
+      "description": "Git commit hash associated with the decision"
+    }
+  },
+  "additionalProperties": false
+}
