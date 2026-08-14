@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/session-fragment-v0.2.schema.json",
+  "title": "AI Collaboration Experience Package - Session Fragment v0.2",
+  "description": "A slice of a Claude Code session tied to a decision point. Prototype / v0.2.",
+  "type": "object",
+  "required": [
+    "fragment_id",
+    "session_id",
+    "source_session_file",
+    "anchor_message_uuid",
+    "start_message_uuid",
+    "end_message_uuid",
+    "message_uuids",
+    "participants",
+    "includes_subagent",
+    "alignment_quality"
+  ],
+  "properties": {
+    "fragment_id": {
+      "type": "string",
+      "pattern": "^frag-[a-z0-9]+(?:-[a-z0-9]+)*-[0-9]+$",
+      "description": "Globally unique fragment identifier"
+    },
+    "session_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Claude Code session UUID"
+    },
+    "source_session_file": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Relative path to the scrubbed session JSONL"
+    },
+    "anchor_message_uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Most representative message UUID for this fragment"
+    },
+    "start_message_uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "end_message_uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "message_uuids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "description": "Ordered list of message UUIDs included in this fragment"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Human-readable summary of the fragment"
+    },
+    "participants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": ["user", "assistant", "system"]
+      }
+    },
+    "includes_subagent": {
+      "type": "boolean",
+      "description": "Whether the fragment involves sub-agent turns"
+    },
+    "alignment_quality": {
+      "type": "string",
+      "enum": ["manual", "heuristic", "inferred"],
+      "description": "How the fragment boundary was determined"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Reviewer notes or caveats about the fragment"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import UnitCard from '../components/UnitCard.astro';
+import { methodTags, unitsByMethodTag, tagLabel } from '../data/loader.ts';
+
+const byMethod = unitsByMethodTag();
+---
+
+<Base title="按方法主题">
+  <h1>按方法主题浏览</h1>
+
+  {
+    methodTags().map((tag) => {
+      const units = byMethod.get(tag.id) ?? [];
+      if (units.length === 0) return null;
+      return (
+        <section class="group-section" key={tag.id}>
+          <h2 class="group-title">{tag.label_zh} <span class="group-sub">{tag.label_en}</span></h2>
+          <div class="unit-grid">
+            {units.map((unit) => (
+              <UnitCard unit={unit} />
+            ))}
+          </div>
+        </section>
+      );
+    })
+  }
+</Base>

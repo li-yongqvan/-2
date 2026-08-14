@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "package_id": "experience-cyber-game-m9-grilling-scope-slice",
+  "title": "Grill-me 驱动的里程碑范围切片",
+  "source_project": "cyber-game",
+  "files": {
+    "tags": "tags-v0.2.json",
+    "session_fragments": "session-fragments-v0.2.jsonl",
+    "git_evidence": "git-evidence-v0.2.jsonl",
+    "decision_points": "decision-points-v0.2.jsonl",
+    "experience_units": "experience-units-v0.2.jsonl",
+    "course_modules": "course-modules-v0.2.json",
+    "learning_paths": "learning-paths-v0.2.json"
+  },
+  "schema_base": "research/session-format/schemas",
+  "notes": "v0.2 prototype. Session fragment anchors are heuristic until manually reviewed."
+}

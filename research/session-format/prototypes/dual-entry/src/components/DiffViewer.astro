@@ -1,0 +1,57 @@
+---
+import type { GitHunkEvidence } from '../data/loader.ts';
+
+export interface Props {
+  hunks: GitHunkEvidence[];
+}
+const { hunks } = Astro.props;
+
+function classifyLine(line: string): { type: 'add' | 'del' | 'ctx' | 'meta'; text: string } {
+  if (line.startsWith('+')) return { type: 'add', text: line.slice(1) };
+  if (line.startsWith('-')) return { type: 'del', text: line.slice(1) };
+  if (line.startsWith('@@') || line.startsWith('diff ') || line.startsWith('index ') || line.startsWith('---') || line.startsWith('+++')) {
+    return { type: 'meta', text: line };
+  }
+  return { type: 'ctx', text: line.startsWith(' ') ? line.slice(1) : line };
+}
+
+function renderHunk(hunk: GitHunkEvidence) {
+  const lines = hunk.hunk.lines?.split('\n') ?? [];
+  return lines.map((raw) => classifyLine(raw));
+}
+---
+
+{
+  hunks.length === 0 && (
+    <p class="empty-state">该 ExperienceUnit 没有关联的代码 diff。</p>
+  )
+}
+
+<div class="diff-stack">
+  {
+    hunks.map((hunk) => (
+      <details class="diff-file" open={hunks.length === 1}>
+        <summary class="diff-summary">
+          <span class="diff-file-path">{hunk.file_path}</span>
+          <span class="diff-meta">
+            {hunk.code_ref} · hunk {hunk.hunk_index}
+          </span>
+        </summary>
+        <div class="diff-body">
+          {hunk.notes && <p class="diff-notes">{hunk.notes}</p>}
+          <pre class="diff-pre">
+            {renderHunk(hunk).map((line, idx) => (
+              <div class={`diff-line diff-${line.type}`}>
+                <span class="diff-marker">
+                  {line.type === 'add' ? '+' : line.type === 'del' ? '-' : ' '}
+                </span>
+                <span class="diff-line-num">{idx + 1}</span>
+                <span class="diff-line-text">{line.text || ' '}</span>
+              </div>
+            ))}
+          </pre>
+        </div>
+      </details>
+    ))
+  }
+</div>

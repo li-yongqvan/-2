@@ -1,0 +1,33 @@
+---
+import { unitDecision, formatDate } from '../data/loader.ts';
+import type { ExperienceUnit } from '../data/loader.ts';
+
+export interface Props {
+  units: ExperienceUnit[];
+  currentUnitId?: string;
+}
+const { units, currentUnitId } = Astro.props;
+const base = import.meta.env.BASE_URL ?? '/';
+
+const sorted = [...units].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+---
+
+<nav class="timeline" aria-label="决策时间轴">
+  {
+    sorted.map((unit, idx) => {
+      const decision = unitDecision(unit);
+      const isCurrent = unit.unit_id === currentUnitId;
+      return (
+        <a
+          href={`${base}unit/${unit.unit_id}`}
+          class={`timeline-item ${isCurrent ? 'current' : ''}`}
+          title={decision?.title ?? unit.unit_id}
+        >
+          <span class="timeline-dot">{idx + 1}</span>
+          <span class="timeline-label">{decision?.title ?? unit.unit_id}</span>
+          <span class="timeline-date">{formatDate(unit.created_at)}</span>
+        </a>
+      );
+    })
+  }
+</nav>

@@ -1,0 +1,38 @@
+{
+  "description": "Scrubbing rules for cyber-game M8-M9 MVP session.",
+  "target_session": "be0044d7-eb49-449b-b05b-2f71b3a742d7",
+  "string_replacements": {
+    "C:\\Users\\LIYONG~1\\AppData\\Local\\Temp\\claude\\C--Users-liyongquan": "<TEMP>/<CLAUDE_PROJECT_DIR>",
+    "C:\\Users\\LIYONG~1": "<HOME>",
+    "C:\\Users\\liyongquan\\cyber-game": "<PROJECT_ROOT>",
+    "C:\\Users\\liyongquan\\.claude": "<CLAUDE_HOME>",
+    "C:\\Users\\liyongquan": "<HOME>",
+    "C:Usersliyongquancyber-game": "<PROJECT_ROOT>",
+    "C:Usersliyongquan": "<HOME>",
+    "C:/Users/liyongquan/cyber-game": "<PROJECT_ROOT>",
+    "C:/Users/liyongquan/.claude": "<CLAUDE_HOME>",
+    "C:/Users/liyongquan": "<HOME>",
+    "C--Users-liyongquan": "<CLAUDE_PROJECT_DIR>",
+    "c-users-liyongquan": "c-users-<USER>",
+    "LIYONG~1": "<USER_SHORT>",
+    "liyongquan": "<USER>",
+    "Liyongquan@123": "<SERVER_PASSWORD>",
+    "122.51.233.225": "<SERVER_IP>",
+    "liyongquan@example.com": "<AUTHOR_EMAIL>",
+    "li.yongquan@example.com": "<AUTHOR_EMAIL>"
+  },
+  "extra_secret_patterns": [
+    ["(?i)(server|password|pwd|pass)\\s*[:：]\\s*['\"]?([A-Za-z0-9@!#$%^&*]{8,})['\"]?", "<REDACTED_SECRET>"]
+  ],
+  "file_snapshot_replacement": "<file-backups-redacted>",
+  "code_ref_template": "<code-ref: {path} @ dd93cc9>",
+  "notes": [
+    "Order matters: replacements are applied longest-first to avoid partial matches.",
+    "GitHub URL 'li-yongqvan' is a public handle and is intentionally NOT replaced.",
+    "File-history snapshots are redacted to their shell; code evidence comes from git diff.",
+    "Chinese prompts and dialogue are preserved as collaboration artifacts.",
+    "Bash-stripped Windows paths (e.g. C:Usersliyongquan...) are also normalized.",
+    "Windows 8.3 short name LIYONG~1, Claude project dir C--Users-liyongquan, and plan filename token c-users-liyongquan are scrubbed.",
+    "Server credentials discovered in transcript are explicitly redacted: 122.51.233.225 and Liyongquan@123."
+  ]
+}

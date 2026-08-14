@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import UnitCard from '../components/UnitCard.astro';
+import Timeline from '../components/Timeline.astro';
+import { courseModules, unitsByModule, moduleTitle } from '../data/loader.ts';
+
+const byModule = unitsByModule();
+---
+
+<Base title="按项目时间线">
+  <h1>按项目时间线浏览</h1>
+
+  {
+    courseModules.map((mod) => {
+      const units = byModule.get(mod.module_id) ?? [];
+      if (units.length === 0) return null;
+      return (
+        <section class="group-section" key={mod.module_id}>
+          <h2 class="group-title">{mod.title}</h2>
+          <p class="group-desc">{mod.description}</p>
+          <Timeline units={units} />
+          <div class="unit-grid">
+            {units.map((unit) => (
+              <UnitCard unit={unit} />
+            ))}
+          </div>
+        </section>
+      );
+    })
+  }
+</Base>

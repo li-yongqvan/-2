@@ -1,0 +1,147 @@
+{
+  "version": "0.2.0",
+  "axes": [
+    {
+      "id": "method",
+      "label_en": "Decision Method",
+      "label_zh": "决策方法"
+    },
+    {
+      "id": "project_phase",
+      "label_en": "Project Phase",
+      "label_zh": "项目阶段"
+    },
+    {
+      "id": "theme",
+      "label_en": "Technical Theme",
+      "label_zh": "技术主题"
+    },
+    {
+      "id": "skill",
+      "label_en": "Collaboration Skill",
+      "label_zh": "协作技能"
+    }
+  ],
+  "tags": [
+    {
+      "id": "method.task_definition",
+      "axis_id": "method",
+      "label_en": "Task Definition",
+      "label_zh": "任务定义"
+    },
+    {
+      "id": "method.method_selection",
+      "axis_id": "method",
+      "label_en": "Method Selection",
+      "label_zh": "方法选择"
+    },
+    {
+      "id": "method.scope_tradeoff",
+      "axis_id": "method",
+      "label_en": "Scope Tradeoff",
+      "label_zh": "范围取舍"
+    },
+    {
+      "id": "method.context_injection",
+      "axis_id": "method",
+      "label_en": "Context Injection",
+      "label_zh": "上下文注入"
+    },
+    {
+      "id": "method.prompt_refinement",
+      "axis_id": "method",
+      "label_en": "Prompt Refinement",
+      "label_zh": "提示精炼"
+    },
+    {
+      "id": "method.constraint_declaration",
+      "axis_id": "method",
+      "label_en": "Constraint Declaration",
+      "label_zh": "约束声明"
+    },
+    {
+      "id": "method.course_correction",
+      "axis_id": "method",
+      "label_en": "Course Correction",
+      "label_zh": "方向修正"
+    },
+    {
+      "id": "method.acceptance_termination",
+      "axis_id": "method",
+      "label_en": "Acceptance / Termination",
+      "label_zh": "验收/终止"
+    },
+    {
+      "id": "phase.m9",
+      "axis_id": "project_phase",
+      "label_en": "Milestone 9",
+      "label_zh": "M9 里程碑"
+    },
+    {
+      "id": "theme.state_management",
+      "axis_id": "theme",
+      "label_en": "State Management",
+      "label_zh": "状态管理"
+    },
+    {
+      "id": "theme.rendering",
+      "axis_id": "theme",
+      "label_en": "Rendering",
+      "label_zh": "渲染"
+    },
+    {
+      "id": "theme.engine",
+      "axis_id": "theme",
+      "label_en": "Simulation Engine",
+      "label_zh": "仿真引擎"
+    },
+    {
+      "id": "theme.ui",
+      "axis_id": "theme",
+      "label_en": "UI Components",
+      "label_zh": "UI 组件"
+    },
+    {
+      "id": "theme.level_design",
+      "axis_id": "theme",
+      "label_en": "Level Design",
+      "label_zh": "关卡设计"
+    },
+    {
+      "id": "theme.testing",
+      "axis_id": "theme",
+      "label_en": "Testing",
+      "label_zh": "测试"
+    },
+    {
+      "id": "theme.build_tooling",
+      "axis_id": "theme",
+      "label_en": "Build Tooling",
+      "label_zh": "构建工具"
+    },
+    {
+      "id": "theme.planning",
+      "axis_id": "theme",
+      "label_en": "Planning",
+      "label_zh": "规划"
+    },
+    {
+      "id": "theme.documentation",
+      "axis_id": "theme",
+      "label_en": "Documentation",
+      "label_zh": "文档"
+    },
+    {
+      "id": "skill.grilling",
+      "axis_id": "skill",
+      "label_en": "Grill-me",
+      "label_zh": "Grill-me 追问"
+    },
+    {
+      "id": "skill.plan_mode",
+      "axis_id": "skill",
+      "label_en": "Plan Mode",
+      "label_zh": "Plan Mode"
+    }
+  ]
+}

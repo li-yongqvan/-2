@@ -1,0 +1,39 @@
+[
+  {
+    "path_id": "path-grilling-milestone",
+    "title": "Grill-me 驱动的里程碑范围切片",
+    "description": "跟随 cyber-game M8-M9 完整决策链，学习如何用 grill-me 把模糊里程碑拆分为可验收任务。",
+    "entry_points": [
+      {
+        "type": "module",
+        "label": "从范围与状态管理开始",
+        "value": "mod-scope-and-state"
+      },
+      {
+        "type": "module",
+        "label": "从 Grill-me 工作流开始",
+        "value": "mod-grilling-workflow"
+      },
+      {
+        "type": "tag",
+        "label": "按方法主题浏览",
+        "value": "method.scope_tradeoff"
+      }
+    ],
+    "modules": [
+      {
+        "module_id": "mod-grilling-workflow",
+        "rationale": "先澄清任务与验收标准"
+      },
+      {
+        "module_id": "mod-scope-and-state",
+        "rationale": "再做范围与状态拆分"
+      },
+      {
+        "module_id": "mod-sandbox-and-rendering",
+        "rationale": "最后落实到交互实现"
+      }
+    ],
+    "estimated_duration_minutes": 105
+  }
+]
