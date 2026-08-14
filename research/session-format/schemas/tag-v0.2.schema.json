@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/tag-v0.2.schema.json",
+  "title": "AI Collaboration Experience Package - Tag Taxonomy v0.2",
+  "description": "Tag axes and tag definitions supporting dual-entry browsing (method theme + project timeline). Prototype / v0.2.",
+  "type": "object",
+  "required": ["version", "axes", "tags"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Taxonomy semantic version"
+    },
+    "axes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "label_en", "label_zh"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "description": "Machine-readable axis identifier"
+          },
+          "label_en": { "type": "string", "minLength": 1 },
+          "label_zh": { "type": "string", "minLength": 1 },
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tags": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "axis_id", "label_en", "label_zh"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$",
+            "description": "Tag id in form 'axis.tag'"
+          },
+          "axis_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "parent_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$",
+            "description": "Optional parent tag id for hierarchical tags"
+          },
+          "label_en": { "type": "string", "minLength": 1 },
+          "label_zh": { "type": "string", "minLength": 1 },
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

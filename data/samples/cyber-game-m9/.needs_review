@@ -1,0 +1,101 @@
+{
+  "count": 20,
+  "items": [
+    {
+      "decision_id": "cyber-game-m9-001",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-002",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-003",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-003",
+      "reason": "affected_file 'src/engine/Link.ts' not found in git-alignment changed_files"
+    },
+    {
+      "decision_id": "cyber-game-m9-004",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-005",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-005",
+      "reason": "affected_file 'src/engine/Interface.ts' not found in git-alignment changed_files"
+    },
+    {
+      "decision_id": "cyber-game-m9-006",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-007",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-008",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-009",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-010",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-011",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-012",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-012",
+      "reason": "affected_file 'src/types/level.ts' not found in git-alignment changed_files"
+    },
+    {
+      "decision_id": "cyber-game-m9-013",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-014",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-015",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    },
+    {
+      "decision_id": "cyber-game-m9-015",
+      "reason": "affected_file 'src/engine/devices/Router.ts' not found in git-alignment changed_files"
+    },
+    {
+      "decision_id": "cyber-game-m9-016",
+      "reason": "anchor_message_uuid was determined heuristically",
+      "anchor_uuid": "5e19a6f2-a91b-4306-8a57-402dc28ce5d6"
+    }
+  ]
+}

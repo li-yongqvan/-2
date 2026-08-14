@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/git-evidence-v0.2.schema.json",
+  "title": "AI Collaboration Experience Package - Git Evidence v0.2",
+  "description": "Code change evidence pointing to a commit, file, or hunk. Prototype / v0.2.",
+  "type": "object",
+  "required": [
+    "evidence_id",
+    "commit_sha",
+    "parent_commit_sha",
+    "kind",
+    "file_path",
+    "code_ref"
+  ],
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^git-[0-9a-f]{7,40}-[a-z0-9_.-]+$",
+      "description": "Globally unique git evidence identifier"
+    },
+    "commit_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,40}$",
+      "description": "Commit SHA where the change appears"
+    },
+    "parent_commit_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,40}$",
+      "description": "Parent commit SHA for diff context"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["commit", "file", "hunk"],
+      "description": "Granularity of the evidence"
+    },
+    "file_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "diff_command": {
+      "type": "string",
+      "description": "Shell command to reproduce the diff"
+    },
+    "code_ref": {
+      "type": "string",
+      "pattern": "^<code-ref: .+ @ [0-9a-f]{7,40}>$",
+      "description": "Human-readable code reference using scrubbing-manifest template"
+    },
+    "hunk": {
+      "type": "object",
+      "required": ["old_start", "new_start", "old_lines", "new_lines", "header"],
+      "properties": {
+        "old_start": { "type": "integer", "minimum": 0 },
+        "new_start": { "type": "integer", "minimum": 1 },
+        "old_lines": { "type": "integer", "minimum": 0 },
+        "new_lines": { "type": "integer", "minimum": 0 },
+        "header": { "type": "string", "minLength": 1 },
+        "lines": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "notes": {
+      "type": "string",
+      "description": "Explanation of why this evidence relates to the decision"
+    }
+  },
+  "additionalProperties": false
+}

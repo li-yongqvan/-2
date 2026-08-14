@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/experience-unit-v0.2.schema.json",
+  "title": "AI Collaboration Experience Package - Experience Unit v0.2",
+  "description": "Wrapper bundling a decision point with its dialogue fragments, code evidence, tags, and course mapping. Prototype / v0.2.",
+  "type": "object",
+  "required": [
+    "unit_id",
+    "decision_id",
+    "session_fragment_ids",
+    "git_evidence_ids",
+    "tag_ids",
+    "entry_points",
+    "review_status",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "unit_id": {
+      "type": "string",
+      "pattern": "^unit-[a-z0-9]+(?:-[a-z0-9]+)*-[0-9]+$",
+      "description": "Globally unique experience unit identifier"
+    },
+    "decision_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-[0-9]+$"
+    },
+    "session_fragment_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^frag-[a-z0-9]+(?:-[a-z0-9]+)*-[0-9]+$"
+      }
+    },
+    "git_evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^git-[0-9a-f]{7,40}-[a-z0-9_.-]+$"
+      }
+    },
+    "tag_ids": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$"
+      },
+      "description": "Must include at least one method tag and one project_phase tag for dual entry"
+    },
+    "course_module_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mod-[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    },
+    "learning_path_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^path-[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    },
+    "entry_points": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["type", "label", "tag_id"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["method", "timeline", "theme", "skill"]
+          },
+          "label": { "type": "string", "minLength": 1 },
+          "tag_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "related_unit_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^unit-[a-z0-9]+(?:-[a-z0-9]+)*-[0-9]+$"
+      }
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["draft", "reviewed", "approved", "rejected"]
+    },
+    "reviewer_notes": { "type": "string" },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

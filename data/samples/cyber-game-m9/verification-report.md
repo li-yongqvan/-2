@@ -81,11 +81,42 @@
    - 已在脱敏阶段处理，但提示未来会话应避免在聊天中粘贴明文密码。
    - 该片段本身可作为经验包的「安全教学」素材（AI 拒绝使用明文凭据）。
 
+## 新增：v0.2 中间数据结构验证
+
+使用 `research/session-format/prototypes/validate-experience-v0.2.py` 对 v0.2 样本进行全面校验：
+
+| 检查项 | 方法 | 结果 |
+|---|---|---|
+| v0.2 schema 合规 | jsonschema Draft-07 | **20 决策点 / 20 经验单元 / 20 会话片段 / 14 git 证据 / 3 课程模块 / 1 学习路径全部通过** ✅ |
+| ID 唯一性 | 同类型 ID 去重 | **0 重复** ✅ |
+| 跨引用一致性 | unit → decision/fragment/evidence/tag/module/path | **全部可解析** ✅ |
+| 会话 UUID 真实性 | 校验 fragment.message_uuids 是否存在于 scrubbed session | **88 个 UUID / 0 缺失** ✅ |
+| Git 对齐 | git-evidence.file_path 是否在 git-alignment 范围内 | **10/14 在 changed_files 内；4 个为决策讨论/预期文件** ⚠️ |
+| 双入口覆盖 | 每个 ExperienceUnit 是否同时含 method + project_phase 标签 | **20/20** ✅ |
+| Taxonomy 完整性 | 所有 tag_id 是否定义在 tags-v0.2.json | **通过** ✅ |
+| 隐私扫描 | 对 v0.2 文件运行 scrubbing-manifest 规则 | **0 命中** ✅ |
+
+**v0.2 文件清单：**
+
+- `tags-v0.2.json`
+- `session-fragments-v0.2.jsonl`
+- `git-evidence-v0.2.jsonl`
+- `decision-points-v0.2.jsonl`
+- `experience-units-v0.2.jsonl`
+- `course-modules-v0.2.json`
+- `learning-paths-v0.2.json`
+- `experience-package-v0.2.json`
+
+**已知限制：**
+- 会话片段锚点对 16 个 grilling-decisions 来源的决策采用启发式定位（标记在 `.needs_review`），需要人工复核。
+- Git hunk 级别证据尚未补充，当前仅到 file 级别；hunk 粒度留给 #4 进一步处理。
+- 4 个 git evidence 文件（`src/engine/Link.ts`、`src/engine/Interface.ts`、`src/types/level.ts`、`src/engine/devices/Router.ts`）出现在决策 `affected_files` 中，但未在 `git-alignment.changed_files` 中，说明这些文件在决策中被讨论或作为后续依赖，而非本次 commit 实际修改。
+
 ## 结论
 
-除 Demo 功能的 JS 渲染验证需补充外，其余 5 项标准均已通过。样本已可用于：
-- #2 Schema 设计的真实验证数据
-- #4 会话-git 对齐的原型验证
+除 Demo 功能的 JS 渲染验证需补充外，v0.1 与 v0.2 校验均已通过。样本已可用于：
+- #2 Schema 设计的真实验证数据（含完整中间数据结构）
+- #4 会话-git 对齐的原型验证（hunk 级可继续细化）
 - #6 人工审核工作流的 UI 测试
 - #7 双入口原型的内容输入
 
@@ -94,3 +125,4 @@
 - [ ] 用 Playwright 访问 `https://li-yongqvan.github.io/cyber-game/sandbox` 确认沙盒页面渲染。
 - [ ] 用 Playwright 访问首页确认关卡锁定/解锁状态与徽章显示。
 - [ ] 在审核 UI 原型中加载 `session-be0044d7-scrubbed.jsonl` 和 `decision-points.jsonl` 做端到端测试。
+- [ ] 人工复核 `data/samples/cyber-game-m9/.needs_review` 中的 16 个启发式会话片段锚点。

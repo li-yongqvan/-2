@@ -373,7 +373,70 @@
 
 ---
 
-## 8. 结论
+## 8. 经验包中间数据结构 v0.2
+
+基于 `cyber-game` M8-M9 的首个样本，我们设计了 v0.2 中间数据结构家族，用于把会话、决策点、git 证据、标签和课程模块串成可交互经验包。
+
+### 8.1 核心关系
+
+```
+LearningPath
+  └── CourseModule
+        └── ExperienceUnit
+              ├── DecisionPoint (1:1)
+              ├── SessionFragment[]
+              ├── GitEvidence[]
+              └── Tag[]
+```
+
+### 8.2 Schema 文件
+
+| Schema | 说明 |
+|---|---|
+| `research/session-format/schemas/tag-v0.2.schema.json` | 标签轴与标签定义 |
+| `research/session-format/schemas/session-fragment-v0.2.schema.json` | 会话片段（UUID 锚定） |
+| `research/session-format/schemas/git-evidence-v0.2.schema.json` | commit/file/hunk 代码证据 |
+| `research/session-format/schemas/decision-point-v0.2.schema.json` | v0.1 字段 + 反向引用 |
+| `research/session-format/schemas/experience-unit-v0.2.schema.json` | 经验单元外壳 |
+| `research/session-format/schemas/course-module-v0.2.schema.json` | 课程模块 |
+| `research/session-format/schemas/learning-path-v0.2.schema.json` | 学习路径 |
+
+### 8.3 标签体系（C3 双入口）
+
+定义 4 个轴：
+
+- `method`：8 类决策方法（任务定义、方法选择、范围取舍、上下文注入、提示精炼、约束声明、方向修正、验收/终止）
+- `project_phase`：项目阶段（如 `phase.m9`）
+- `theme`：技术主题（state_management、rendering、engine、ui 等）
+- `skill`：协作技能（grilling、plan_mode 等）
+
+每个 `ExperienceUnit` 必须至少包含一个 `method` 标签和一个 `project_phase` 标签，以同时支持「方法主题」和「项目时间线」两种入口。
+
+### 8.4 样本数据
+
+v0.2 样本位于 `data/samples/cyber-game-m9/`：
+
+| 文件 | 说明 |
+|---|---|
+| `tags-v0.2.json` | 完整标签表 |
+| `session-fragments-v0.2.jsonl` | 20 条会话片段 |
+| `git-evidence-v0.2.jsonl` | 14 条文件级 git 证据 |
+| `decision-points-v0.2.jsonl` | 20 条 v0.2 决策点（含反向引用） |
+| `experience-units-v0.2.jsonl` | 20 个经验单元 |
+| `course-modules-v0.2.json` | 3 个课程模块 |
+| `learning-paths-v0.2.json` | 1 条学习路径 |
+| `experience-package-v0.2.json` | 包清单 |
+
+### 8.5 生成与验证工具
+
+- `scripts/generate_experience_units_v0.2.py`：从 v0.1 决策点、git-alignment、scrubbed session 生成全部 v0.2 文件。
+- `research/session-format/prototypes/validate-experience-v0.2.py`：校验 schema、跨引用、会话 UUID 真实性、git 对齐、双入口、隐私扫描。
+
+当前 v0.2 会话片段锚点大多采用启发式（首条 user 消息或子串匹配），在 `.needs_review` 中标记，等待人工复核。
+
+---
+
+## 9. 结论
 
 - Claude Code 在本地以 **JSONL** 形式保存完整会话，主文件位于 `~/.claude/projects/<project>/<sessionId>.jsonl`。
 - 每条记录有 `type` 字段，核心消息类型为 `user` 与 `assistant`；assistant 内容以块列表形式承载 `text` / `thinking` / `tool_use`。

@@ -1,0 +1,127 @@
+[
+  {
+    "module_id": "mod-scope-and-state",
+    "title": "范围取舍与状态管理",
+    "description": "M8-M9 拆分、沙盒范围、状态持久化等关键范围与状态决策。",
+    "entry_type": "mixed",
+    "learning_objectives": [
+      "识别里程碑边界处的范围风险",
+      "在拆分与合并之间做出可验收的决策",
+      "将运行时状态与持久化状态分离"
+    ],
+    "prerequisites": [],
+    "unit_sequence": [
+      {
+        "unit_id": "unit-cyber-game-m9-001",
+        "rationale": "范围取舍：M8-M9 合并推进还是拆分推进？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-003",
+        "rationale": "范围取舍：教学版沙盒是否支持增删设备/链路？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-004",
+        "rationale": "范围取舍：沙盒提供多少个预设？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-008",
+        "rationale": "方法选择：沙盒状态放在现有 simulatorStore 还是独立 slice？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-009",
+        "rationale": "方法选择：进度持久化放在 simulatorStore 还是独立 store？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-012",
+        "rationale": "范围取舍：徽章评分要做到什么粒度？"
+      }
+    ],
+    "estimated_duration_minutes": 33
+  },
+  {
+    "module_id": "mod-sandbox-and-rendering",
+    "title": "沙盒与渲染交互",
+    "description": "教学版沙盒、拖拽、实时链路、设备面板等交互与引擎决策。",
+    "entry_type": "method",
+    "learning_objectives": [
+      "在教学版沙盒中平衡功能与成本",
+      "设计渲染层与引擎层的状态边界",
+      "用占位策略避免阻塞里程碑"
+    ],
+    "prerequisites": [],
+    "unit_sequence": [
+      {
+        "unit_id": "unit-cyber-game-m9-002",
+        "rationale": "任务定义：教学版沙盒的核心目标是什么？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-005",
+        "rationale": "方法选择：Simulator 动态编辑时是重新创建还是增量变更？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-006",
+        "rationale": "方法选择：拖拽时设备位置在哪一层更新？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-007",
+        "rationale": "方法选择：拖拽过程中链路是否实时跟随？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-013",
+        "rationale": "方法选择：沙盒导出 JSON 的格式是什么？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-014",
+        "rationale": "范围取舍：SandboxScene 的元数据包含哪些字段？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-015",
+        "rationale": "约束声明：Router 设备在沙盒中是什么状态？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-016",
+        "rationale": "范围取舍：沙盒中 DevicePanel 是只读还是可编辑？"
+      }
+    ],
+    "estimated_duration_minutes": 39
+  },
+  {
+    "module_id": "mod-grilling-workflow",
+    "title": "Grill-me 工作流与验收",
+    "description": "用 grill-me 把模糊任务收敛为可执行计划，并在适当时机退出 plan mode。",
+    "entry_type": "method",
+    "learning_objectives": [
+      "用结构化追问澄清任务歧义",
+      "确定验收深度与输出位置",
+      "判断何时从计划转向执行"
+    ],
+    "prerequisites": [],
+    "unit_sequence": [
+      {
+        "unit_id": "unit-cyber-game-m9-010",
+        "rationale": "方法选择：关卡完成时 simulatorStore 如何通知 progressStore？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-011",
+        "rationale": "约束声明：关卡解锁规则是怎样的？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-017",
+        "rationale": "任务定义：Q1：本次「执行 M9 的规划」希望做什么？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-018",
+        "rationale": "方法选择：Q2：验收深度要做到什么程度？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-019",
+        "rationale": "方法选择：Q3：是否需要把验收结果写回计划文件或更新 HANDOFF.md？"
+      },
+      {
+        "unit_id": "unit-cyber-game-m9-020",
+        "rationale": "验收/终止：Q4：是否同意退出 plan mode 并开始执行验收？"
+      }
+    ],
+    "estimated_duration_minutes": 33
+  }
+]

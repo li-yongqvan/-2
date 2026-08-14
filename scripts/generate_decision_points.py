@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 """
-Generate decision-points.jsonl for cyber-game M8-M9 MVP experience package.
+Generate decision-points.jsonl for cyber-game M8-M9 MVP experience package (v0.1 baseline).
+
+This script produces the standalone decision-point records that conform to
+research/session-format/schemas/decision-point-v0.1.schema.json.
+
+For the full v0.2 intermediate data structure (ExperienceUnit, SessionFragment,
+GitEvidence, tags, course modules), see:
+    scripts/generate_experience_units_v0.2.py
 
 Sources:
 - docs/decisions/0008-mvp-scope.md
