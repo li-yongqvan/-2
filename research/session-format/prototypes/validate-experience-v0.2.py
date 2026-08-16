@@ -10,6 +10,7 @@ Validates the full v0.2 intermediate data structure for issue #2:
 - git alignment
 - dual-entry coverage
 - privacy scan
+- capture markers (optional)
 
 Run:
     python research/session-format/prototypes/validate-experience-v0.2.py
@@ -17,6 +18,7 @@ Run:
 Outputs a Markdown report to stdout.
 """
 
+import argparse
 import json
 import re
 from collections import Counter, defaultdict
@@ -79,12 +81,23 @@ def privacy_scan(text: str, manifest: dict) -> list[str]:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Experience Package v0.2 Validator")
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Treat soft warnings as errors (used for v1.0 or strict checks).",
+    )
+    args = parser.parse_args()
+
     print("# Experience Package v0.2 Validation Report\n")
+    if args.strict:
+        print("> **Strict mode enabled**: soft warnings are treated as errors.\n")
     print(f"- Sample directory: `{SAMPLE_DIR.relative_to(REPO_ROOT)}`")
     print(f"- jsonschema available: {'yes' if HAS_JSONSCHEMA else 'no (structural checks only)'}\n")
 
     errors: list[str] = []
     warnings: list[str] = []
+    soft_warnings: list[str] = []
 
     # Load schemas
     schema_validators = {
@@ -96,6 +109,7 @@ def main() -> None:
         "experience_unit": load_schema("experience-unit-v0.2.schema.json"),
         "course_module": load_schema("course-module-v0.2.schema.json"),
         "learning_path": load_schema("learning-path-v0.2.schema.json"),
+        "capture_marker": load_schema("capture-marker-v0.2.schema.json"),
     }
 
     # Load data
@@ -107,6 +121,7 @@ def main() -> None:
     experience_units = load_jsonl(SAMPLE_DIR / "experience-units-v0.2.jsonl")
     course_modules = load_json(SAMPLE_DIR / "course-modules-v0.2.json")
     learning_paths = load_json(SAMPLE_DIR / "learning-paths-v0.2.json")
+    capture_markers = load_jsonl(SAMPLE_DIR / "capture-markers-v0.2.jsonl")
 
     git_alignment = load_json(SAMPLE_DIR / "git-alignment.json")
     scrubbing_manifest = load_json(SAMPLE_DIR / "scrubbing-manifest.json")
@@ -196,6 +211,14 @@ def main() -> None:
         for e in errs:
             errors.append(f"learning-paths item {i}: {e}")
 
+    marker_ids = check_unique(capture_markers, "marker_id", "capture-markers-v0.2.jsonl")
+    for line_no, marker in capture_markers:
+        if "__json_error__" in marker:
+            continue
+        errs = validate_with_schema(schema_validators["capture_marker"], marker)
+        for e in errs:
+            errors.append(f"capture-markers line {line_no}: {e}")
+
     print(f"- Decision points: {len(decision_ids)}")
     print(f"- Experience units: {len(unit_ids)}")
     print(f"- Session fragments: {len(fragment_ids)}")
@@ -203,6 +226,7 @@ def main() -> None:
     print(f"- Git hunk evidences: {len(hunk_evidence_ids)}")
     print(f"- Course modules: {len(module_ids)}")
     print(f"- Learning paths: {len(path_ids)}")
+    print(f"- Capture markers: {len(marker_ids)}")
     print()
 
     # Cross-reference checks
@@ -231,6 +255,9 @@ def main() -> None:
         for pid in unit.get("learning_path_ids", []):
             if pid not in path_ids:
                 errors.append(f"experience-units line {line_no}: learning_path_id '{pid}' not found")
+        for cmid in unit.get("candidate_markers", []):
+            if cmid not in marker_ids:
+                soft_warnings.append(f"experience-units line {line_no}: candidate_marker '{cmid}' not found")
 
     for line_no, dp in decision_points:
         if "__json_error__" in dp:
@@ -264,6 +291,7 @@ def main() -> None:
                 errors.append(f"learning-paths item {i}: module_id '{mid}' not found")
 
     print("- Checked unit → decision/fragment/evidence/hunk_evidence/tag/module/path links")
+    print("- Checked unit → candidate_markers links")
     print("- Checked decision → unit/fragment/evidence/hunk_evidence/tag links")
     print("- Checked module/path → unit/module links\n")
 
@@ -279,6 +307,13 @@ def main() -> None:
                 missing_uuids += 1
                 errors.append(f"session-fragments line {line_no}: uuid '{uuid}' not found in session files")
 
+    for line_no, marker in capture_markers:
+        if "__json_error__" in marker:
+            continue
+        anchor_uuid = marker.get("anchor_message_uuid")
+        if anchor_uuid and anchor_uuid not in all_session_uuids:
+            soft_warnings.append(f"capture-markers line {line_no}: anchor_message_uuid '{anchor_uuid}' not found in session files")
+
     print(f"- Session UUIDs checked: {sum(len(frag[1].get('message_uuids', [])) for frag in session_fragments if '__json_error__' not in frag[1])}")
     print(f"- Missing UUIDs: {missing_uuids}\n")
 
@@ -292,7 +327,7 @@ def main() -> None:
         fp = ev.get("file_path")
         if fp and fp not in allowed_git_files:
             missing_files += 1
-            warnings.append(f"git-evidence line {line_no}: file_path '{fp}' not in git-alignment changed_files/key_files")
+            soft_warnings.append(f"git-evidence line {line_no}: file_path '{fp}' not in git-alignment changed_files/key_files")
 
     for line_no, ev in git_hunk_evidences:
         if "__json_error__" in ev:
@@ -300,7 +335,7 @@ def main() -> None:
         fp = ev.get("file_path")
         if fp and fp not in allowed_git_files:
             missing_files += 1
-            warnings.append(f"git-hunk-evidence line {line_no}: file_path '{fp}' not in git-alignment changed_files/key_files")
+            soft_warnings.append(f"git-hunk-evidence line {line_no}: file_path '{fp}' not in git-alignment changed_files/key_files")
 
     print(f"- Git evidence files: {len(evidence_ids)}")
     print(f"- Git hunk evidence files: {len(hunk_evidence_ids)}")
@@ -320,8 +355,23 @@ def main() -> None:
 
     print(f"- Units with method + phase tags: {len(experience_units) - dual_entry_failures}/{len(experience_units)}\n")
 
+    # Capture markers
+    print("## 6. Capture Markers\n")
+
+    unresolved_anchors = 0
+    for line_no, marker in capture_markers:
+        if "__json_error__" in marker:
+            continue
+        confidence = marker.get("anchor_confidence")
+        if confidence in (None, "unresolved"):
+            unresolved_anchors += 1
+            soft_warnings.append(f"capture-markers line {line_no}: unresolved anchor for marker '{marker.get('marker_id')}'")
+
+    print(f"- Capture markers: {len(capture_markers)}")
+    print(f"- Unresolved anchors: {unresolved_anchors}\n")
+
     # Privacy scan
-    print("## 6. Privacy Scan\n")
+    print("## 7. Privacy Scan\n")
 
     privacy_hits = 0
     files_to_scan = [
@@ -333,36 +383,54 @@ def main() -> None:
         SAMPLE_DIR / "experience-units-v0.2.jsonl",
         SAMPLE_DIR / "course-modules-v0.2.json",
         SAMPLE_DIR / "learning-paths-v0.2.json",
+        SAMPLE_DIR / "capture-markers-v0.2.jsonl",
     ]
     for path in files_to_scan:
+        if not path.exists():
+            continue
         text = path.read_text(encoding="utf-8")
         hits = privacy_scan(text, scrubbing_manifest)
         for hit in hits:
             privacy_hits += 1
-            warnings.append(f"{path.name}: {hit}")
+            errors.append(f"{path.name}: {hit}")
 
-    print(f"- Files scanned: {len(files_to_scan)}")
+    print(f"- Files scanned: {sum(1 for p in files_to_scan if p.exists())}")
     print(f"- Privacy hits: {privacy_hits}\n")
 
     # Summary
     print("## Summary\n")
+
+    if args.strict:
+        # In strict mode, soft warnings block publication.
+        errors.extend(soft_warnings)
+        soft_warnings = []
+
     if errors:
         print(f"**Errors:** {len(errors)}")
         for e in errors:
             print(f"- {e}")
         print()
+
     if warnings:
         print(f"**Warnings:** {len(warnings)}")
         for w in warnings:
             print(f"- {w}")
         print()
 
-    if not errors and not warnings:
+    if soft_warnings:
+        print(f"**Soft warnings:** {len(soft_warnings)}")
+        print("_Soft warnings are acceptable for v0.x but must be reviewed and recorded. "
+              "Use `--strict` to treat them as errors._\n")
+        for w in soft_warnings:
+            print(f"- {w}")
+        print()
+
+    if not errors and not warnings and not soft_warnings:
         print("All checks passed. v0.2 sample data is valid and ready for downstream use.")
     elif not errors:
-        print("No errors. Warnings should be reviewed but do not block downstream use.")
+        print("No errors. Warnings / soft warnings should be reviewed but do not block downstream use.")
     else:
-        print("Validation failed. Fix errors before committing.")
+        print("Validation failed. Fix errors before committing or publishing.")
 
 
 if __name__ == "__main__":
