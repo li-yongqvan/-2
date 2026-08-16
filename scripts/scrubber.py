@@ -9,7 +9,9 @@ Usage:
     python scripts/scrubber.py \
         --input ~/.claude/projects/C--Users-liyongquan/be0044d7-eb49-449b-b05b-2f71b3a742d7.jsonl \
         --output data/samples/cyber-game-m9/session-be0044d7-scrubbed.jsonl \
-        --manifest data/samples/cyber-game-m9/scrubbing-manifest.json
+        --manifest data/samples/cyber-game-m9/scrubbing-manifest.json \
+        --sidecar-input ~/.claude/projects/C--Users-liyongquan--2/b88de51a-capture-markers.jsonl \
+        --sidecar-output data/samples/cyber-game-m9/b88de51a-capture-markers-scrubbed.jsonl
 """
 
 import argparse
@@ -133,17 +135,63 @@ def scrub_file(input_path: Path, output_path: Path, manifest: dict[str, Any]) ->
     return stats
 
 
+def scrub_markers(input_path: Path | None, output_path: Path | None, manifest: dict[str, Any]) -> dict[str, Any]:
+    """Scrub a capture-markers JSONL sidecar file."""
+    stats = {"input_markers": 0, "output_markers": 0, "secrets_detected": 0}
+    if not input_path or not output_path:
+        return stats
+    if not input_path.exists():
+        # Touch an empty scrubbed file so downstream scripts can still open it.
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text("", encoding="utf-8")
+        return stats
+
+    replacements = build_replacements(manifest)
+    secret_patterns = [(p, r) for p, r in DEFAULT_SECRET_PATTERNS]
+    if manifest.get("extra_secret_patterns"):
+        secret_patterns.extend((p, r) for p, r in manifest["extra_secret_patterns"])
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with input_path.open("r", encoding="utf-8") as infile, output_path.open("w", encoding="utf-8") as outfile:
+        for line in infile:
+            line = line.strip()
+            if not line:
+                continue
+            stats["input_markers"] += 1
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                outfile.write(scrub_text(line, replacements, secret_patterns) + "\n")
+                stats["output_markers"] += 1
+                continue
+
+            scrubbed = scrub_value(record, replacements, secret_patterns)
+            outfile.write(json.dumps(scrubbed, ensure_ascii=False) + "\n")
+            stats["output_markers"] += 1
+
+    with output_path.open("r", encoding="utf-8") as f:
+        output_text = f.read()
+    for pattern, _ in secret_patterns:
+        stats["secrets_detected"] += len(re.findall(pattern, output_text))
+
+    return stats
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Scrub Claude Code session JSONL for Wayfinder.")
     parser.add_argument("--input", required=True, type=Path, help="Input JSONL session file.")
     parser.add_argument("--output", required=True, type=Path, help="Output scrubbed JSONL file.")
     parser.add_argument("--manifest", required=True, type=Path, help="Scrubbing manifest JSON.")
+    parser.add_argument("--sidecar-input", type=Path, default=None, help="Optional capture markers sidecar JSONL.")
+    parser.add_argument("--sidecar-output", type=Path, default=None, help="Output scrubbed capture markers JSONL.")
     args = parser.parse_args()
 
     manifest = load_manifest(args.manifest)
-    stats = scrub_file(args.input, args.output, manifest)
+    session_stats = scrub_file(args.input, args.output, manifest)
+    marker_stats = scrub_markers(args.sidecar_input, args.sidecar_output, manifest)
 
-    print(json.dumps(stats, indent=2, ensure_ascii=False))
+    print(json.dumps({"session": session_stats, "markers": marker_stats}, indent=2, ensure_ascii=False))
     return 0
 
 

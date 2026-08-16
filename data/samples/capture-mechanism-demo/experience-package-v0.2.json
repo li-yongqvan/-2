@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "package_id": "experience-capture-mechanism-demo",
+  "title": "Capture Mechanism M2 End-to-End Demo",
+  "source_project": "-2",
+  "files": {
+    "tags": "tags-v0.2.json",
+    "session_fragments": "session-fragments-v0.2.jsonl",
+    "decision_points": "decision-points-v0.2.jsonl",
+    "experience_units": "experience-units-v0.2.jsonl",
+    "capture_markers": "capture-markers-v0.2.jsonl"
+  },
+  "schema_base": "research/session-format/schemas",
+  "notes": "M2 demo generated from synthetic capture markers."
+}

@@ -1,0 +1,63 @@
+{
+  "version": "0.2.0",
+  "axes": [
+    {
+      "id": "method",
+      "label_en": "Decision Method",
+      "label_zh": "决策方法"
+    },
+    {
+      "id": "project_phase",
+      "label_en": "Project Phase",
+      "label_zh": "项目阶段"
+    },
+    {
+      "id": "theme",
+      "label_en": "Technical Theme",
+      "label_zh": "技术主题"
+    },
+    {
+      "id": "skill",
+      "label_en": "Collaboration Skill",
+      "label_zh": "协作技能"
+    }
+  ],
+  "tags": [
+    {
+      "id": "phase.demo",
+      "axis_id": "project_phase",
+      "label_en": "Demo Phase",
+      "label_zh": "演示阶段"
+    },
+    {
+      "id": "skill.capture",
+      "axis_id": "skill",
+      "label_en": "Capture",
+      "label_zh": "捕获机制"
+    },
+    {
+      "id": "method.scope_tradeoff",
+      "axis_id": "method",
+      "label_en": "Scope Tradeoff",
+      "label_zh": "范围取舍"
+    },
+    {
+      "id": "theme.architecture",
+      "axis_id": "theme",
+      "label_en": "Architecture",
+      "label_zh": "Architecture"
+    },
+    {
+      "id": "method.constraint_declaration",
+      "axis_id": "method",
+      "label_en": "Constraint Declaration",
+      "label_zh": "约束声明"
+    },
+    {
+      "id": "theme.testing",
+      "axis_id": "theme",
+      "label_en": "Testing",
+      "label_zh": "Testing"
+    }
+  ]
+}
