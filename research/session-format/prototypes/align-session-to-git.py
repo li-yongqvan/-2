@@ -40,7 +40,11 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SAMPLE_DIR = REPO_ROOT / "data" / "samples" / "cyber-game-m9"
 
-SESSION_PATH = SAMPLE_DIR / "session-be0044d7-scrubbed.jsonl"
+SESSION_PATHS = [
+    SAMPLE_DIR / "session-be0044d7-scrubbed.jsonl",
+    SAMPLE_DIR / "subagent-abe9460ea165d5867-scrubbed.jsonl",
+    SAMPLE_DIR / "session-4241638d-grilling-scrubbed.jsonl",
+]
 FRAGMENTS_PATH = SAMPLE_DIR / "session-fragments-v0.2.jsonl"
 DECISIONS_PATH = SAMPLE_DIR / "decision-points-v0.2.jsonl"
 GIT_EVIDENCE_PATH = SAMPLE_DIR / "git-evidence-v0.2.jsonl"
@@ -352,7 +356,9 @@ def main() -> None:
     if repo is None:
         print(f"WARN: repo {repo_path} not available; hunk parsing and inference disabled.")
 
-    messages = load_session_messages(SESSION_PATH)
+    messages: dict[str, dict] = {}
+    for sp in SESSION_PATHS:
+        messages.update(load_session_messages(sp))
     fragments = load_jsonl(FRAGMENTS_PATH)
     decisions = load_jsonl(DECISIONS_PATH)
     git_evidence_list = load_jsonl(GIT_EVIDENCE_PATH)

@@ -112,8 +112,9 @@ def main() -> None:
     scrubbing_manifest = load_json(SAMPLE_DIR / "scrubbing-manifest.json")
     session_messages = load_jsonl(SAMPLE_DIR / "session-be0044d7-scrubbed.jsonl")
     subagent_messages = load_jsonl(SAMPLE_DIR / "subagent-abe9460ea165d5867-scrubbed.jsonl")
+    grilling_messages = load_jsonl(SAMPLE_DIR / "session-4241638d-grilling-scrubbed.jsonl")
 
-    all_session_uuids = {m.get("uuid") for _, m in session_messages + subagent_messages if m.get("uuid")}
+    all_session_uuids = {m.get("uuid") for _, m in session_messages + subagent_messages + grilling_messages if m.get("uuid")}
     changed_files = set(git_alignment.get("changed_files", []))
     key_files = set(git_alignment.get("key_files_for_m8_m9", []))
     allowed_git_files = changed_files | key_files

@@ -1,6 +1,6 @@
 # Alignment Chain Report (prototype v0.1)
 
-Generated: 2026-08-14T07:28:06.135988+00:00
+Generated: 2026-08-16T10:04:35.408747+00:00
 Total decisions: 20
 Decisions with git evidence: 16
 Decisions with inferred evidence: 0

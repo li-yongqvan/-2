@@ -110,10 +110,89 @@ curl http://127.0.0.1:8765/api/units
 - [x] 在审核 UI 原型中加载会话与决策点做端到端测试
 - [x] 人工复核 `.needs_review` 中的 16 个启发式会话片段锚点（存在性通过，精确定位留待后续迭代）
 
+## 5. v0.3 锚点 UUID 精确修复（#12）
+
+**日期**：2026-08-16  
+**关联**：#12（精确复核 cyber-game M9 的 16 个启发式会话片段锚点）
+
+### 发现
+
+v0.2 中 16 个 grilling-decisions 来源的片段（cyber-game-m9-001 ~ 016）全部锚定到同一条 `local-command-caveat` meta 消息（`5e19a6f2-a91b-4306-8a57-402dc28ce5d6`），无实际对话语义。复核后发现这些 grill-me 追问发生在另一个原始会话：
+
+- **原始会话 ID**：`4241638d-64f0-431f-ad35-50e40b6313e0`
+- **原始文件**：`C:\Users\liyongquan\.claude\projects\C--Users-liyongquan\4241638d-64f0-431f-ad35-50e40b6313e0.jsonl`
+- **线索**：`grilling-m9-qa-record.md` 中的 `originSessionId: 4241638d-...`
+
+同时发现 017–020 的 `anchor_message_uuid` 也锚到了 `file-history-delta` 而非真正的追问消息，一并修复。
+
+### 修复内容
+
+1. 从原始会话提取 16 组 grill-me 追问 + 用户回答消息，按现有 `scrubbing-manifest.json` 脱敏后保存为 `data/samples/cyber-game-m9/session-4241638d-grilling-scrubbed.jsonl`。
+2. 更新 `session-fragments-v0.2.jsonl`（001–020）：
+   - `session_id` → 真实会话 ID
+   - `source_session_file` → 对应 scrubbed jsonl
+   - `anchor_message_uuid` / `start_message_uuid` / `end_message_uuid` / `message_uuids` → 真实追问与回答 UUID
+   - `participants` → `["assistant", "user"]`
+   - `alignment_quality` → `manual`
+3. 更新 `decision-points-v0.2.jsonl` 的 `related_message_uuids`。
+4. 更新 `validate-experience-v0.2.py` 与 `align-session-to-git.py`，使验证脚本可加载新会话文件。
+5. 重新生成 `.needs_review`：移除 16 条 heuristic 锚点条目，保留 4 条 git-alignment 文件未命中警告。
+
+### 验证结果
+
+```bash
+python research/session-format/prototypes/validate-experience-v0.2.py
+```
+
+| 检查项 | v0.2 | v0.3 |
+|---|---|---|
+| Schema errors | 0 | 0 |
+| Missing session UUIDs | 16 | 0 |
+| Duplicate anchor | 1 | 0 |
+| Privacy hits | 0 | 0 |
+| Git alignment file warnings | 4 | 4 |
+
+### 16 个锚点修复前后对照
+
+| 决策 | 修复前（caveat meta） | 修复后（真实追问） |
+|---|---|---|
+| 001 | `5e19a6f2-...` | `bdd8a305-3c16-4ce5-be1e-1fd08b9634b0` |
+| 002 | `5e19a6f2-...` | `bd61494c-6930-47c7-a336-897a1b134726` |
+| 003 | `5e19a6f2-...` | `65b09d7e-9cf1-4345-8dfe-902c88213741` |
+| 004 | `5e19a6f2-...` | `860dfdcc-0cb2-4150-9a8d-c37ffbfce5b0` |
+| 005 | `5e19a6f2-...` | `49ff4ef6-ee70-44b6-b5ab-0ffc34b427f5` |
+| 006 | `5e19a6f2-...` | `574fe6e3-2906-467f-8348-465ce3dc8733` |
+| 007 | `5e19a6f2-...` | `0e2ffea6-4262-4563-9956-c9ec6c0384aa` |
+| 008 | `5e19a6f2-...` | `97e36654-01f4-4bec-abc9-5b1b8edd0701` |
+| 009 | `5e19a6f2-...` | `54acd7e8-1c36-4c15-86e7-0ecab962fbbf` |
+| 010 | `5e19a6f2-...` | `c3ecb75d-82a3-44e2-9d71-f58ed3af88be` |
+| 011 | `5e19a6f2-...` | `8d32d5c2-bda7-47e9-8ad4-1ab1f1a36142` |
+| 012 | `5e19a6f2-...` | `14f909f5-92b1-4655-921d-15fcbd5ccbc8` |
+| 013 | `5e19a6f2-...` | `188aeee4-e999-4b41-bd2a-4b52abcd2600` |
+| 014 | `5e19a6f2-...` | `420712c1-2988-431b-af85-313d4c3e9738` |
+| 015 | `5e19a6f2-...` | `14e62a36-c752-4d17-9677-7fbbe49d7c6a` |
+| 016 | `5e19a6f2-...` | `2dea8335-a9fb-4bf2-8037-ea70f0bb082c` |
+
+### 017–020 一并修复
+
+| 决策 | 修复前（file-history-delta） | 修复后（真实追问） |
+|---|---|---|
+| 017 | `8407641e-...` | `35267e67-0a52-43d0-a577-97ca81136c96` |
+| 018 | `8407641e-...` | `2e37687c-d7b3-41c8-945e-c81823b271aa` |
+| 019 | `8407641e-...` | `673088f0-7d65-4867-98a5-a2bcddf85c0b` |
+| 020 | `8407641e-...` | `921b0eda-e21f-4b19-8e64-b5c56f880ea4` |
+
+### 结论
+
+- 16 个启发式会话片段锚点已全部精确化，`.needs_review` 中不再有需要复核的锚点问题。
+- 剩余 4 条 git-alignment 文件未命中警告属于决策 `affected_files` 与实际 commit 修改范围的差异，不影响 #12 关闭。
+- 修复后的数据对 #10（police 项目迁移）更友好，因为 anchor 不再指向无意义的 meta 消息。
+
 ## 参考
 
 - 线上 Demo：https://li-yongqvan.github.io/cyber-game/
 - 双入口原型：/dual-entry/
 - 原验证报告：`data/samples/cyber-game-m9/verification-report.md`
 - 发布 ticket：#9
+- 锚点修复 ticket：#12
 - 父地图：#1
