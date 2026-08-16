@@ -122,7 +122,26 @@
 
 ## 建议的后续验证
 
-- [ ] 用 Playwright 访问 `https://li-yongqvan.github.io/cyber-game/sandbox` 确认沙盒页面渲染。
-- [ ] 用 Playwright 访问首页确认关卡锁定/解锁状态与徽章显示。
-- [ ] 在审核 UI 原型中加载 `session-be0044d7-scrubbed.jsonl` 和 `decision-points.jsonl` 做端到端测试。
-- [ ] 人工复核 `data/samples/cyber-game-m9/.needs_review` 中的 16 个启发式会话片段锚点。
+- [x] 用 Playwright 访问 `https://li-yongqvan.github.io/cyber-game/sandbox` 确认沙盒页面渲染。
+- [x] 用 Playwright 访问首页确认关卡锁定/解锁状态与徽章显示。
+- [x] 在审核 UI 原型中加载 `session-be0044d7-scrubbed.jsonl` 和 `decision-points.jsonl` 做端到端测试。
+- [x] 人工复核 `data/samples/cyber-game-m9/.needs_review` 中的 16 个启发式会话片段锚点。
+
+## 后续验证结果（#9 发布阶段补充，2026-08-16）
+
+详见 [`docs/decisions/0010-m9-playwright-verification.md`](/docs/decisions/0010-m9-playwright-verification.md)。
+
+| 检查项 | 结果 |
+|---|---|
+| Playwright 首页关卡/锁定/解锁 | ✅ 通过 |
+| Playwright 沙盒页面渲染 | ✅ 通过（通过客户端导航进入 `/sandbox`） |
+| review-workflow 加载 20 units/20 anchors | ✅ 通过 |
+| `.needs_review` 锚点存在性 | ✅ 16/16 UUID 存在于会话 |
+| `.needs_review` 锚点精确性 | ⚠️ 16 个锚点均指向同一条 meta 消息，需后续迭代精确定位；不影响 v0.2 发布 |
+
+发布入口：
+
+- GitHub Pages：https://li-yongqvan.github.io/-2/
+- 双入口原型：https://li-yongqvan.github.io/-2/dual-entry/
+- cyber-game Demo：https://li-yongqvan.github.io/cyber-game/
+- 发布 ticket：#9

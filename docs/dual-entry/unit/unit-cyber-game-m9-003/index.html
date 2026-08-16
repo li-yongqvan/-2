@@ -1,0 +1,2608 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>教学版沙盒是否支持增删设备/链路？ — Dual Entry Prototype</title><link rel="stylesheet" href="/-2/dual-entry/styles.css"></head> <body> <header class="site-header"> <nav class="site-nav"> <a class="brand" href="/-2/dual-entry/">🧭 Dual Entry</a> <a href="/-2/dual-entry/by-method">按方法主题</a> <a href="/-2/dual-entry/by-project">按项目时间线</a> </nav> </header> <main class="site-main">  <div class="detail-header"> <span class="status-badge status-draft">draft</span> <h1>教学版沙盒是否支持增删设备/链路？</h1> <p class="detail-question">&#39;预设体验优先&#39;确立后，仍需要决定玩家能在多大程度上修改预设场景。只读拖拽最省工作但限制实验价值；允许增删设备的&#39;轻量编辑&#39;比完整自由搭建更实用。</p> </div> <section class="detail-meta"> <div> <strong>ID:</strong> unit-cyber-game-m9-003 </div> <div> <strong>决策:</strong> B. 预设+轻量编辑 </div> <div> <strong>时间:</strong> 2026/8/14 12:23 </div> <div> <strong>标签:</strong> <span class="tag-pill">范围取舍 (Scope Tradeoff)</span><span class="tag-pill">M9 里程碑 (Milestone 9)</span><span class="tag-pill">Grill-me 追问 (Grill-me)</span><span class="tag-pill">仿真引擎 (Simulation Engine)</span> </div> <div> <strong>模块:</strong> <span class="module-pill">范围取舍与状态管理</span> </div> </section> <div class="detail-columns"> <!-- 左栏：对话片段 --> <section class="detail-col"> <h2>对话片段</h2> <nav class="timeline" aria-label="决策时间轴"> <a href="/-2/dual-entry/unit/unit-cyber-game-m9-001" class="timeline-item " title="M8-M9 合并推进还是拆分推进？"> <span class="timeline-dot">1</span> <span class="timeline-label">M8-M9 合并推进还是拆分推进？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-002" class="timeline-item " title="教学版沙盒的核心目标是什么？"> <span class="timeline-dot">2</span> <span class="timeline-label">教学版沙盒的核心目标是什么？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-003" class="timeline-item current" title="教学版沙盒是否支持增删设备/链路？"> <span class="timeline-dot">3</span> <span class="timeline-label">教学版沙盒是否支持增删设备/链路？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-004" class="timeline-item " title="沙盒提供多少个预设？"> <span class="timeline-dot">4</span> <span class="timeline-label">沙盒提供多少个预设？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-005" class="timeline-item " title="Simulator 动态编辑时是重新创建还是增量变更？"> <span class="timeline-dot">5</span> <span class="timeline-label">Simulator 动态编辑时是重新创建还是增量变更？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-006" class="timeline-item " title="拖拽时设备位置在哪一层更新？"> <span class="timeline-dot">6</span> <span class="timeline-label">拖拽时设备位置在哪一层更新？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-007" class="timeline-item " title="拖拽过程中链路是否实时跟随？"> <span class="timeline-dot">7</span> <span class="timeline-label">拖拽过程中链路是否实时跟随？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-008" class="timeline-item " title="沙盒状态放在现有 simulatorStore 还是独立 slice？"> <span class="timeline-dot">8</span> <span class="timeline-label">沙盒状态放在现有 simulatorStore 还是独立 slice？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-009" class="timeline-item " title="进度持久化放在 simulatorStore 还是独立 store？"> <span class="timeline-dot">9</span> <span class="timeline-label">进度持久化放在 simulatorStore 还是独立 store？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-010" class="timeline-item " title="关卡完成时 simulatorStore 如何通知 progressStore？"> <span class="timeline-dot">10</span> <span class="timeline-label">关卡完成时 simulatorStore 如何通知 progressStore？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-011" class="timeline-item " title="关卡解锁规则是怎样的？"> <span class="timeline-dot">11</span> <span class="timeline-label">关卡解锁规则是怎样的？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-012" class="timeline-item " title="徽章评分要做到什么粒度？"> <span class="timeline-dot">12</span> <span class="timeline-label">徽章评分要做到什么粒度？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-013" class="timeline-item " title="沙盒导出 JSON 的格式是什么？"> <span class="timeline-dot">13</span> <span class="timeline-label">沙盒导出 JSON 的格式是什么？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-014" class="timeline-item " title="SandboxScene 的元数据包含哪些字段？"> <span class="timeline-dot">14</span> <span class="timeline-label">SandboxScene 的元数据包含哪些字段？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-015" class="timeline-item " title="Router 设备在沙盒中是什么状态？"> <span class="timeline-dot">15</span> <span class="timeline-label">Router 设备在沙盒中是什么状态？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-016" class="timeline-item " title="沙盒中 DevicePanel 是只读还是可编辑？"> <span class="timeline-dot">16</span> <span class="timeline-label">沙盒中 DevicePanel 是只读还是可编辑？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-017" class="timeline-item " title="Q1：本次「执行 M9 的规划」希望做什么？"> <span class="timeline-dot">17</span> <span class="timeline-label">Q1：本次「执行 M9 的规划」希望做什么？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-018" class="timeline-item " title="Q2：验收深度要做到什么程度？"> <span class="timeline-dot">18</span> <span class="timeline-label">Q2：验收深度要做到什么程度？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-019" class="timeline-item " title="Q3：是否需要把验收结果写回计划文件或更新 HANDOFF.md？"> <span class="timeline-dot">19</span> <span class="timeline-label">Q3：是否需要把验收结果写回计划文件或更新 HANDOFF.md？</span> <span class="timeline-date">2026/8/14 12:23</span> </a><a href="/-2/dual-entry/unit/unit-cyber-game-m9-020" class="timeline-item " title="Q4：是否同意退出 plan mode 并开始执行验收？"> <span class="timeline-dot">20</span> <span class="timeline-label">Q4：是否同意退出 plan mode 并开始执行验收？</span> <span class="timeline-date">2026/8/14 12:23</span> </a> </nav>  <article class="fragment-card"> <div class="fragment-header"> <strong>frag-be0044d7-cybergamem9-003</strong> <span class="fragment-quality">heuristic</span> </div> <p>Session fragment for decision cyber-game-m9-003: 教学版沙盒是否支持增删设备/链路？</p> <div class="fragment-meta"> <span>参与者: system, user</span>  </div> <div class="fragment-messages"> <span>消息 UUID:</span> <code>5e19a6f2-a91b-4306-8a57-402dc28ce5d6</code> </div> </article> </section> <!-- 中栏：代码 diff --> <section class="detail-col"> <h2>代码 diff</h2> <div class="diff-stack"> <details class="diff-file"> <summary class="diff-summary"> <span class="diff-file-path">src/engine/Simulator.ts</span> <span class="diff-meta"> &lt;code-ref: src/engine/Simulator.ts @ dd93cc9&gt; · hunk 0 </span> </summary> <div class="diff-body">  <pre class="diff-pre">            <div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">1</span>
+                <span class="diff-line-text">  DeviceId,</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">2</span>
+                <span class="diff-line-text">  DeviceType,</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">3</span>
+                <span class="diff-line-text">  InterfaceId,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">4</span>
+                <span class="diff-line-text">  MacAddress,</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">5</span>
+                <span class="diff-line-text">  NetworkConfig,</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">6</span>
+                <span class="diff-line-text">  Packet,</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">7</span>
+                <span class="diff-line-text">  SimEvent,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">8</span>
+                <span class="diff-line-text">  Vec2,</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">9</span>
+                <span class="diff-line-text">} from &#39;./types.ts&#39;</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">10</span>
+                <span class="diff-line-text">import { Device } from &#39;./Device.ts&#39;</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">11</span>
+                <span class="diff-line-text">import { Host } from &#39;./devices/Host.ts&#39;</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">12</span>
+                <span class="diff-line-text">import { Switch } from &#39;./devices/Switch.ts&#39;</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">13</span>
+                <span class="diff-line-text">import { Router } from &#39;./devices/Router.ts&#39;</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">14</span>
+                <span class="diff-line-text">import { Firewall } from &#39;./devices/Firewall.ts&#39;</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">15</span>
+                <span class="diff-line-text">import { Link } from &#39;./Link.ts&#39;</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">16</span>
+                <span class="diff-line-text">import {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">17</span>
+                <span class="diff-line-text">  makeAttackerConfig,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">18</span>
+                <span class="diff-line-text">  makeFirewallConfig,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">19</span>
+                <span class="diff-line-text">  makeHostConfig,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">20</span>
+                <span class="diff-line-text">  makeRouterConfig,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">21</span>
+                <span class="diff-line-text">  makeSwitchConfig,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">22</span>
+                <span class="diff-line-text">  nextSandboxLinkId,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">23</span>
+                <span class="diff-line-text">} from &#39;./factories.ts&#39;</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">24</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">25</span>
+                <span class="diff-line-text">const DEFAULT_TICK_MS = 16</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">26</span>
+                <span class="diff-line-text"> </span>
+              </div>
+          </pre> </div> </details><details class="diff-file"> <summary class="diff-summary"> <span class="diff-file-path">src/engine/Simulator.ts</span> <span class="diff-meta"> &lt;code-ref: src/engine/Simulator.ts @ dd93cc9&gt; · hunk 1 </span> </summary> <div class="diff-body">  <pre class="diff-pre">            <div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">1</span>
+                <span class="diff-line-text">    }</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">2</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">3</span>
+                <span class="diff-line-text">    for (const linkConfig of config.links) {</span>
+              </div><div class="diff-line diff-del">
+                <span class="diff-marker">
+                  -
+                </span>
+                <span class="diff-line-num">4</span>
+                <span class="diff-line-text">      const link = new Link(linkConfig)</span>
+              </div><div class="diff-line diff-del">
+                <span class="diff-marker">
+                  -
+                </span>
+                <span class="diff-line-num">5</span>
+                <span class="diff-line-text">      this.links.set(link.id, link)</span>
+              </div><div class="diff-line diff-del">
+                <span class="diff-marker">
+                  -
+                </span>
+                <span class="diff-line-num">6</span>
+                <span class="diff-line-text">      this.interfaceToLink.set(link.interfaceA, link)</span>
+              </div><div class="diff-line diff-del">
+                <span class="diff-marker">
+                  -
+                </span>
+                <span class="diff-line-num">7</span>
+                <span class="diff-line-text">      this.interfaceToLink.set(link.interfaceB, link)</span>
+              </div><div class="diff-line diff-del">
+                <span class="diff-marker">
+                  -
+                </span>
+                <span class="diff-line-num">8</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-del">
+                <span class="diff-marker">
+                  -
+                </span>
+                <span class="diff-line-num">9</span>
+                <span class="diff-line-text">      // 绑定接口到链路</span>
+              </div><div class="diff-line diff-del">
+                <span class="diff-marker">
+                  -
+                </span>
+                <span class="diff-line-num">10</span>
+                <span class="diff-line-text">      const ifaceA = this.findInterface(link.interfaceA)</span>
+              </div><div class="diff-line diff-del">
+                <span class="diff-marker">
+                  -
+                </span>
+                <span class="diff-line-num">11</span>
+                <span class="diff-line-text">      const ifaceB = this.findInterface(link.interfaceB)</span>
+              </div><div class="diff-line diff-del">
+                <span class="diff-marker">
+                  -
+                </span>
+                <span class="diff-line-num">12</span>
+                <span class="diff-line-text">      if (ifaceA) ifaceA.linkId = link.id</span>
+              </div><div class="diff-line diff-del">
+                <span class="diff-marker">
+                  -
+                </span>
+                <span class="diff-line-num">13</span>
+                <span class="diff-line-text">      if (ifaceB) ifaceB.linkId = link.id</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">14</span>
+                <span class="diff-line-text">      this.addLinkInternal(linkConfig)</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">15</span>
+                <span class="diff-line-text">    }</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">16</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">17</span>
+                <span class="diff-line-text"> </span>
+              </div>
+          </pre> </div> </details><details class="diff-file"> <summary class="diff-summary"> <span class="diff-file-path">src/engine/Simulator.ts</span> <span class="diff-meta"> &lt;code-ref: src/engine/Simulator.ts @ dd93cc9&gt; · hunk 2 </span> </summary> <div class="diff-body">  <pre class="diff-pre">            <div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">1</span>
+                <span class="diff-line-text">        return new Switch(config)</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">2</span>
+                <span class="diff-line-text">      case &#39;router&#39;:</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">3</span>
+                <span class="diff-line-text">        return new Router(config)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">4</span>
+                <span class="diff-line-text">      case &#39;firewall&#39;:</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">5</span>
+                <span class="diff-line-text">        return new Firewall(config)</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">6</span>
+                <span class="diff-line-text">      default:</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">7</span>
+                <span class="diff-line-text">        throw new Error(`Unknown device type: ${config.type}`)</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">8</span>
+                <span class="diff-line-text">    }</span>
+              </div>
+          </pre> </div> </details><details class="diff-file"> <summary class="diff-summary"> <span class="diff-file-path">src/engine/Simulator.ts</span> <span class="diff-meta"> &lt;code-ref: src/engine/Simulator.ts @ dd93cc9&gt; · hunk 3 </span> </summary> <div class="diff-body">  <pre class="diff-pre">            <div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">1</span>
+                <span class="diff-line-text">    return undefined</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">2</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">3</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">4</span>
+                <span class="diff-line-text">  /** 动态添加设备（沙盒模式使用） */</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">5</span>
+                <span class="diff-line-text">  addDevice(type: DeviceType, position: Vec2, name?: string): Device {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">6</span>
+                <span class="diff-line-text">    let config: DeviceConfig</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">7</span>
+                <span class="diff-line-text">    const options = { position, name }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">8</span>
+                <span class="diff-line-text">    switch (type) {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">9</span>
+                <span class="diff-line-text">      case &#39;host&#39;:</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">10</span>
+                <span class="diff-line-text">        config = makeHostConfig(options)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">11</span>
+                <span class="diff-line-text">        break</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">12</span>
+                <span class="diff-line-text">      case &#39;attacker&#39;:</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">13</span>
+                <span class="diff-line-text">        config = makeAttackerConfig(options)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">14</span>
+                <span class="diff-line-text">        break</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">15</span>
+                <span class="diff-line-text">      case &#39;switch&#39;:</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">16</span>
+                <span class="diff-line-text">        config = makeSwitchConfig(options)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">17</span>
+                <span class="diff-line-text">        break</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">18</span>
+                <span class="diff-line-text">      case &#39;firewall&#39;:</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">19</span>
+                <span class="diff-line-text">        config = makeFirewallConfig(options)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">20</span>
+                <span class="diff-line-text">        break</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">21</span>
+                <span class="diff-line-text">      case &#39;router&#39;:</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">22</span>
+                <span class="diff-line-text">        config = makeRouterConfig(options)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">23</span>
+                <span class="diff-line-text">        break</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">24</span>
+                <span class="diff-line-text">      default:</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">25</span>
+                <span class="diff-line-text">        throw new Error(`Unknown device type: ${type}`)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">26</span>
+                <span class="diff-line-text">    }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">27</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">28</span>
+                <span class="diff-line-text">    const device = this.createDevice(config)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">29</span>
+                <span class="diff-line-text">    this.devices.set(device.id, device)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">30</span>
+                <span class="diff-line-text">    return device</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">31</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">32</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">33</span>
+                <span class="diff-line-text">  /** 动态移除设备及其关联链路 */</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">34</span>
+                <span class="diff-line-text">  removeDevice(deviceId: DeviceId): boolean {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">35</span>
+                <span class="diff-line-text">    const device = this.devices.get(deviceId)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">36</span>
+                <span class="diff-line-text">    if (!device) return false</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">37</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">38</span>
+                <span class="diff-line-text">    const linksToRemove: string[] = []</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">39</span>
+                <span class="diff-line-text">    for (const iface of device.interfaces.values()) {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">40</span>
+                <span class="diff-line-text">      const link = this.interfaceToLink.get(iface.id)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">41</span>
+                <span class="diff-line-text">      if (link) {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">42</span>
+                <span class="diff-line-text">        linksToRemove.push(link.id)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">43</span>
+                <span class="diff-line-text">      }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">44</span>
+                <span class="diff-line-text">    }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">45</span>
+                <span class="diff-line-text">    for (const linkId of linksToRemove) {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">46</span>
+                <span class="diff-line-text">      this.removeLink(linkId)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">47</span>
+                <span class="diff-line-text">    }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">48</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">49</span>
+                <span class="diff-line-text">    this.promiscuousHooks = this.promiscuousHooks.filter((h) =&gt; h.deviceId !== deviceId)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">50</span>
+                <span class="diff-line-text">    this.devices.delete(deviceId)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">51</span>
+                <span class="diff-line-text">    return true</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">52</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">53</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">54</span>
+                <span class="diff-line-text">  /** 动态添加链路 */</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">55</span>
+                <span class="diff-line-text">  addLink(interfaceA: InterfaceId, interfaceB: InterfaceId, latencyMs = 1200): Link {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">56</span>
+                <span class="diff-line-text">    const deviceA = this.findDeviceByInterface(interfaceA)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">57</span>
+                <span class="diff-line-text">    const deviceB = this.findDeviceByInterface(interfaceB)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">58</span>
+                <span class="diff-line-text">    if (!deviceA || !deviceB) {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">59</span>
+                <span class="diff-line-text">      throw new Error(`One or both interfaces not found: ${interfaceA}, ${interfaceB}`)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">60</span>
+                <span class="diff-line-text">    }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">61</span>
+                <span class="diff-line-text">    if (deviceA === deviceB) {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">62</span>
+                <span class="diff-line-text">      throw new Error(&#39;Cannot connect a device to itself&#39;)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">63</span>
+                <span class="diff-line-text">    }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">64</span>
+                <span class="diff-line-text">    if (this.interfaceToLink.has(interfaceA) || this.interfaceToLink.has(interfaceB)) {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">65</span>
+                <span class="diff-line-text">      throw new Error(`One or both interfaces are already connected`)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">66</span>
+                <span class="diff-line-text">    }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">67</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">68</span>
+                <span class="diff-line-text">    const link = this.addLinkInternal({</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">69</span>
+                <span class="diff-line-text">      id: nextSandboxLinkId(),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">70</span>
+                <span class="diff-line-text">      interfaceA,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">71</span>
+                <span class="diff-line-text">      interfaceB,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">72</span>
+                <span class="diff-line-text">      latencyMs,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">73</span>
+                <span class="diff-line-text">    })</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">74</span>
+                <span class="diff-line-text">    return link</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">75</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">76</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">77</span>
+                <span class="diff-line-text">  private addLinkInternal(linkConfig: { id: string; interfaceA: InterfaceId; interfaceB: InterfaceId; latencyMs: number }): Link {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">78</span>
+                <span class="diff-line-text">    const link = new Link(linkConfig)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">79</span>
+                <span class="diff-line-text">    this.links.set(link.id, link)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">80</span>
+                <span class="diff-line-text">    this.interfaceToLink.set(link.interfaceA, link)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">81</span>
+                <span class="diff-line-text">    this.interfaceToLink.set(link.interfaceB, link)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">82</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">83</span>
+                <span class="diff-line-text">    const ifaceA = this.findInterface(link.interfaceA)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">84</span>
+                <span class="diff-line-text">    const ifaceB = this.findInterface(link.interfaceB)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">85</span>
+                <span class="diff-line-text">    if (ifaceA) ifaceA.linkId = link.id</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">86</span>
+                <span class="diff-line-text">    if (ifaceB) ifaceB.linkId = link.id</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">87</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">88</span>
+                <span class="diff-line-text">    return link</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">89</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">90</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">91</span>
+                <span class="diff-line-text">  /** 动态移除链路 */</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">92</span>
+                <span class="diff-line-text">  removeLink(linkId: string): boolean {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">93</span>
+                <span class="diff-line-text">    const link = this.links.get(linkId)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">94</span>
+                <span class="diff-line-text">    if (!link) return false</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">95</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">96</span>
+                <span class="diff-line-text">    const ifaceA = this.findInterface(link.interfaceA)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">97</span>
+                <span class="diff-line-text">    const ifaceB = this.findInterface(link.interfaceB)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">98</span>
+                <span class="diff-line-text">    if (ifaceA) ifaceA.linkId = undefined</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">99</span>
+                <span class="diff-line-text">    if (ifaceB) ifaceB.linkId = undefined</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">100</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">101</span>
+                <span class="diff-line-text">    this.interfaceToLink.delete(link.interfaceA)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">102</span>
+                <span class="diff-line-text">    this.interfaceToLink.delete(link.interfaceB)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">103</span>
+                <span class="diff-line-text">    this.links.delete(linkId)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">104</span>
+                <span class="diff-line-text">    return true</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">105</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">106</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">107</span>
+                <span class="diff-line-text">  /** 移动设备位置 */</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">108</span>
+                <span class="diff-line-text">  moveDevice(deviceId: DeviceId, x: number, y: number): boolean {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">109</span>
+                <span class="diff-line-text">    const device = this.devices.get(deviceId)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">110</span>
+                <span class="diff-line-text">    if (!device) return false</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">111</span>
+                <span class="diff-line-text">    device.setPosition(x, y)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">112</span>
+                <span class="diff-line-text">    return true</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">113</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">114</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">115</span>
+                <span class="diff-line-text">  /** 序列化当前拓扑为 NetworkConfig */</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">116</span>
+                <span class="diff-line-text">  toJson(): NetworkConfig {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">117</span>
+                <span class="diff-line-text">    const devices: DeviceConfig[] = []</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">118</span>
+                <span class="diff-line-text">    for (const device of this.devices.values()) {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">119</span>
+                <span class="diff-line-text">      devices.push({</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">120</span>
+                <span class="diff-line-text">        id: device.id,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">121</span>
+                <span class="diff-line-text">        name: device.name,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">122</span>
+                <span class="diff-line-text">        type: device.type,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">123</span>
+                <span class="diff-line-text">        position: { ...device.position },</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">124</span>
+                <span class="diff-line-text">        interfaces: [...device.interfaces.values()].map((iface) =&gt; ({</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">125</span>
+                <span class="diff-line-text">          id: iface.id,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">126</span>
+                <span class="diff-line-text">          mac: iface.mac,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">127</span>
+                <span class="diff-line-text">          ip: iface.ip,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">128</span>
+                <span class="diff-line-text">          subnetMask: iface.subnetMask,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">129</span>
+                <span class="diff-line-text">        })),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">130</span>
+                <span class="diff-line-text">        arpTable: Object.fromEntries(device.arpTable),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">131</span>
+                <span class="diff-line-text">        routingTable: [...device.routingTable],</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">132</span>
+                <span class="diff-line-text">        listenPorts: [...device.listenPorts],</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">133</span>
+                <span class="diff-line-text">        defaultGateway: device.defaultGateway,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">134</span>
+                <span class="diff-line-text">        aclRules: [...device.aclRules],</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">135</span>
+                <span class="diff-line-text">      })</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">136</span>
+                <span class="diff-line-text">    }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">137</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">138</span>
+                <span class="diff-line-text">    const links = [...this.links.values()].map((link) =&gt; ({</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">139</span>
+                <span class="diff-line-text">      id: link.id,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">140</span>
+                <span class="diff-line-text">      interfaceA: link.interfaceA,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">141</span>
+                <span class="diff-line-text">      interfaceB: link.interfaceB,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">142</span>
+                <span class="diff-line-text">      latencyMs: link.latencyMs,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">143</span>
+                <span class="diff-line-text">      bandwidthKbps: Number.isFinite(link.bandwidthKbps) ? link.bandwidthKbps : undefined,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">144</span>
+                <span class="diff-line-text">    }))</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">145</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">146</span>
+                <span class="diff-line-text">    return { devices, links }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">147</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">148</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">149</span>
+                <span class="diff-line-text">  getDeviceMac(deviceId: DeviceId): MacAddress | undefined {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">150</span>
+                <span class="diff-line-text">    const device = this.devices.get(deviceId)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">151</span>
+                <span class="diff-line-text">    if (!device) return undefined</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">152</span>
+                <span class="diff-line-text">    const firstIface = [...device.interfaces.values()][0]</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">153</span>
+                <span class="diff-line-text">    return firstIface?.mac</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">154</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">155</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">156</span>
+                <span class="diff-line-text">  /** 推进一个 tick：先 advance 链路，再处理到达包 */</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">157</span>
+                <span class="diff-line-text">  tick(deltaMs = this.tickMs, speed = 1): void {</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">158</span>
+                <span class="diff-line-text">    const arrivals: Array&lt;{ packet: Packet; deviceId: DeviceId; interfaceId: InterfaceId }&gt; = []</span>
+              </div>
+          </pre> </div> </details><details class="diff-file"> <summary class="diff-summary"> <span class="diff-file-path">src/engine/Device.ts</span> <span class="diff-meta"> &lt;code-ref: src/engine/Device.ts @ dd93cc9&gt; · hunk 0 </span> </summary> <div class="diff-body">  <pre class="diff-pre">            <div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">1</span>
+                <span class="diff-line-text">import type {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">2</span>
+                <span class="diff-line-text">  AclRule,</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">3</span>
+                <span class="diff-line-text">  DeviceConfig,</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">4</span>
+                <span class="diff-line-text">  DeviceId,</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">5</span>
+                <span class="diff-line-text">  DeviceType,</span>
+              </div>
+          </pre> </div> </details><details class="diff-file"> <summary class="diff-summary"> <span class="diff-file-path">src/engine/Device.ts</span> <span class="diff-meta"> &lt;code-ref: src/engine/Device.ts @ dd93cc9&gt; · hunk 1 </span> </summary> <div class="diff-body">  <pre class="diff-pre">            <div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">1</span>
+                <span class="diff-line-text">  readonly id: DeviceId</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">2</span>
+                <span class="diff-line-text">  readonly name: string</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">3</span>
+                <span class="diff-line-text">  readonly type: DeviceType</span>
+              </div><div class="diff-line diff-del">
+                <span class="diff-marker">
+                  -
+                </span>
+                <span class="diff-line-num">4</span>
+                <span class="diff-line-text">  readonly position: { x: number; y: number }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">5</span>
+                <span class="diff-line-text">  position: { x: number; y: number }</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">6</span>
+                <span class="diff-line-text">  readonly interfaces: Map&lt;InterfaceId, Interface&gt;</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">7</span>
+                <span class="diff-line-text">  readonly arpTable: Map&lt;IpAddress, MacAddress&gt;</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">8</span>
+                <span class="diff-line-text">  readonly staticArpTable: Map&lt;IpAddress, MacAddress&gt;</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">9</span>
+                <span class="diff-line-text">  readonly routingTable: RouteEntry[]</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">10</span>
+                <span class="diff-line-text">  readonly listenPorts: Set&lt;number&gt;</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">11</span>
+                <span class="diff-line-text">  readonly aclRules: AclRule[]</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">12</span>
+                <span class="diff-line-text">  readonly defaultGateway?: IpAddress</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">13</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">14</span>
+                <span class="diff-line-text">  constructor(config: DeviceConfig) {</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">15</span>
+                <span class="diff-line-text">    this.id = config.id</span>
+              </div>
+          </pre> </div> </details><details class="diff-file"> <summary class="diff-summary"> <span class="diff-file-path">src/engine/Device.ts</span> <span class="diff-meta"> &lt;code-ref: src/engine/Device.ts @ dd93cc9&gt; · hunk 2 </span> </summary> <div class="diff-body">  <pre class="diff-pre">            <div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">1</span>
+                <span class="diff-line-text">    this.staticArpTable = new Map()</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">2</span>
+                <span class="diff-line-text">    this.routingTable = config.routingTable ? [...config.routingTable] : []</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">3</span>
+                <span class="diff-line-text">    this.listenPorts = new Set(config.listenPorts ?? [])</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">4</span>
+                <span class="diff-line-text">    this.aclRules = config.aclRules ? [...config.aclRules] : []</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">5</span>
+                <span class="diff-line-text">    this.defaultGateway = config.defaultGateway</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">6</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">7</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">8</span>
+                <span class="diff-line-text">  getInterfaceByMac(mac: MacAddress): Interface | undefined {</span>
+              </div>
+          </pre> </div> </details><details class="diff-file"> <summary class="diff-summary"> <span class="diff-file-path">src/engine/Device.ts</span> <span class="diff-meta"> &lt;code-ref: src/engine/Device.ts @ dd93cc9&gt; · hunk 3 </span> </summary> <div class="diff-body">  <pre class="diff-pre">            <div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">1</span>
+                <span class="diff-line-text">    this.arpTable.set(ip, normalized)</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">2</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">3</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">4</span>
+                <span class="diff-line-text">  /** 更新设备在画布上的位置 */</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">5</span>
+                <span class="diff-line-text">  setPosition(x: number, y: number): void {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">6</span>
+                <span class="diff-line-text">    this.position.x = x</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">7</span>
+                <span class="diff-line-text">    this.position.y = y</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">8</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">9</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">10</span>
+                <span class="diff-line-text">  /** 判断某 IP 是否为静态 ARP 条目 */</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">11</span>
+                <span class="diff-line-text">  isStaticArp(ip: IpAddress): boolean {</span>
+              </div><div class="diff-line diff-ctx">
+                <span class="diff-marker">
+                   
+                </span>
+                <span class="diff-line-num">12</span>
+                <span class="diff-line-text">    return this.staticArpTable.has(ip)</span>
+              </div>
+          </pre> </div> </details><details class="diff-file"> <summary class="diff-summary"> <span class="diff-file-path">src/engine/factories.ts</span> <span class="diff-meta"> &lt;code-ref: src/engine/factories.ts @ dd93cc9&gt; · hunk 0 </span> </summary> <div class="diff-body">  <pre class="diff-pre">            <div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">1</span>
+                <span class="diff-line-text">import type { DeviceConfig, DeviceId, DeviceType, InterfaceConfig, InterfaceId, IpAddress, MacAddress, RouteEntry, Vec2 } from &#39;./types.ts&#39;</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">2</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">3</span>
+                <span class="diff-line-text">let globalDeviceCounter = 0</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">4</span>
+                <span class="diff-line-text">let globalMacCounter = 0</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">5</span>
+                <span class="diff-line-text">let globalIpCounter = 0</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">6</span>
+                <span class="diff-line-text">let globalLinkCounter = 0</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">7</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">8</span>
+                <span class="diff-line-text">export function resetSandboxCounters(): void {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">9</span>
+                <span class="diff-line-text">  globalDeviceCounter = 0</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">10</span>
+                <span class="diff-line-text">  globalMacCounter = 0</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">11</span>
+                <span class="diff-line-text">  globalIpCounter = 0</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">12</span>
+                <span class="diff-line-text">  globalLinkCounter = 0</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">13</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">14</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">15</span>
+                <span class="diff-line-text">export function nextSandboxDeviceId(type: DeviceType): DeviceId {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">16</span>
+                <span class="diff-line-text">  globalDeviceCounter++</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">17</span>
+                <span class="diff-line-text">  const prefix = type === &#39;attacker&#39; ? &#39;att&#39; : type.slice(0, 4)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">18</span>
+                <span class="diff-line-text">  return `${prefix}-${globalDeviceCounter}`</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">19</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">20</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">21</span>
+                <span class="diff-line-text">export function nextSandboxInterfaceId(deviceId: DeviceId, index: number): InterfaceId {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">22</span>
+                <span class="diff-line-text">  return `${deviceId}-eth${index}`</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">23</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">24</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">25</span>
+                <span class="diff-line-text">export function nextSandboxMac(): MacAddress {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">26</span>
+                <span class="diff-line-text">  globalMacCounter++</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">27</span>
+                <span class="diff-line-text">  const n = globalMacCounter</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">28</span>
+                <span class="diff-line-text">  return [</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">29</span>
+                <span class="diff-line-text">    &#39;00&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">30</span>
+                <span class="diff-line-text">    &#39;00&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">31</span>
+                <span class="diff-line-text">    &#39;00&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">32</span>
+                <span class="diff-line-text">    padHex((n &gt;&gt; 16) &amp; 0xff),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">33</span>
+                <span class="diff-line-text">    padHex((n &gt;&gt; 8) &amp; 0xff),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">34</span>
+                <span class="diff-line-text">    padHex(n &amp; 0xff),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">35</span>
+                <span class="diff-line-text">  ].join(&#39;:&#39;)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">36</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">37</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">38</span>
+                <span class="diff-line-text">function padHex(value: number): string {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">39</span>
+                <span class="diff-line-text">  return value.toString(16).padStart(2, &#39;0&#39;)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">40</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">41</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">42</span>
+                <span class="diff-line-text">export function nextSandboxIp(): IpAddress {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">43</span>
+                <span class="diff-line-text">  globalIpCounter++</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">44</span>
+                <span class="diff-line-text">  // 生成 10.0.x.y / 10.1.x.y 避免与关卡默认 192.168.x.x 冲突</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">45</span>
+                <span class="diff-line-text">  const block = Math.floor((globalIpCounter - 1) / 65024)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">46</span>
+                <span class="diff-line-text">  const host = (globalIpCounter - 1) % 65024</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">47</span>
+                <span class="diff-line-text">  if (block === 0) {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">48</span>
+                <span class="diff-line-text">    return `10.0.${(host &gt;&gt; 8) &amp; 0xff}.${host &amp; 0xff}`</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">49</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">50</span>
+                <span class="diff-line-text">  return `10.${block}.${(host &gt;&gt; 8) &amp; 0xff}.${host &amp; 0xff}`</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">51</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">52</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">53</span>
+                <span class="diff-line-text">export function nextSandboxLinkId(): string {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">54</span>
+                <span class="diff-line-text">  globalLinkCounter++</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">55</span>
+                <span class="diff-line-text">  return `l${globalLinkCounter}`</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">56</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">57</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">58</span>
+                <span class="diff-line-text">export interface DeviceFactoryOptions {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">59</span>
+                <span class="diff-line-text">  name?: string</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">60</span>
+                <span class="diff-line-text">  position: Vec2</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">61</span>
+                <span class="diff-line-text">  ip?: IpAddress</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">62</span>
+                <span class="diff-line-text">  subnetMask?: IpAddress</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">63</span>
+                <span class="diff-line-text">  defaultGateway?: IpAddress</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">64</span>
+                <span class="diff-line-text">  portCount?: number</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">65</span>
+                <span class="diff-line-text">  listenPorts?: number[]</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">66</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">67</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">68</span>
+                <span class="diff-line-text">export function makeHostConfig(options: DeviceFactoryOptions): DeviceConfig {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">69</span>
+                <span class="diff-line-text">  const id = nextSandboxDeviceId(&#39;host&#39;)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">70</span>
+                <span class="diff-line-text">  const ifaceId = nextSandboxInterfaceId(id, 0)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">71</span>
+                <span class="diff-line-text">  const ip = options.ip ?? nextSandboxIp()</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">72</span>
+                <span class="diff-line-text">  return {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">73</span>
+                <span class="diff-line-text">    id,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">74</span>
+                <span class="diff-line-text">    name: options.name ?? `Host ${globalDeviceCounter}`,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">75</span>
+                <span class="diff-line-text">    type: &#39;host&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">76</span>
+                <span class="diff-line-text">    position: { ...options.position },</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">77</span>
+                <span class="diff-line-text">    interfaces: [</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">78</span>
+                <span class="diff-line-text">      {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">79</span>
+                <span class="diff-line-text">        id: ifaceId,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">80</span>
+                <span class="diff-line-text">        mac: nextSandboxMac(),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">81</span>
+                <span class="diff-line-text">        ip,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">82</span>
+                <span class="diff-line-text">        subnetMask: options.subnetMask ?? &#39;255.255.255.0&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">83</span>
+                <span class="diff-line-text">      },</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">84</span>
+                <span class="diff-line-text">    ],</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">85</span>
+                <span class="diff-line-text">    defaultGateway: options.defaultGateway,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">86</span>
+                <span class="diff-line-text">    listenPorts: options.listenPorts,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">87</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">88</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">89</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">90</span>
+                <span class="diff-line-text">export function makeAttackerConfig(options: DeviceFactoryOptions): DeviceConfig {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">91</span>
+                <span class="diff-line-text">  const id = nextSandboxDeviceId(&#39;attacker&#39;)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">92</span>
+                <span class="diff-line-text">  const ifaceId = nextSandboxInterfaceId(id, 0)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">93</span>
+                <span class="diff-line-text">  const ip = options.ip ?? nextSandboxIp()</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">94</span>
+                <span class="diff-line-text">  return {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">95</span>
+                <span class="diff-line-text">    id,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">96</span>
+                <span class="diff-line-text">    name: options.name ?? `Attacker ${globalDeviceCounter}`,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">97</span>
+                <span class="diff-line-text">    type: &#39;attacker&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">98</span>
+                <span class="diff-line-text">    position: { ...options.position },</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">99</span>
+                <span class="diff-line-text">    interfaces: [</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">100</span>
+                <span class="diff-line-text">      {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">101</span>
+                <span class="diff-line-text">        id: ifaceId,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">102</span>
+                <span class="diff-line-text">        mac: nextSandboxMac(),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">103</span>
+                <span class="diff-line-text">        ip,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">104</span>
+                <span class="diff-line-text">        subnetMask: options.subnetMask ?? &#39;255.255.255.0&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">105</span>
+                <span class="diff-line-text">      },</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">106</span>
+                <span class="diff-line-text">    ],</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">107</span>
+                <span class="diff-line-text">    defaultGateway: options.defaultGateway,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">108</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">109</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">110</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">111</span>
+                <span class="diff-line-text">export function makeSwitchConfig(options: DeviceFactoryOptions): DeviceConfig {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">112</span>
+                <span class="diff-line-text">  const id = nextSandboxDeviceId(&#39;switch&#39;)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">113</span>
+                <span class="diff-line-text">  const portCount = options.portCount ?? 4</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">114</span>
+                <span class="diff-line-text">  return {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">115</span>
+                <span class="diff-line-text">    id,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">116</span>
+                <span class="diff-line-text">    name: options.name ?? `Switch ${globalDeviceCounter}`,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">117</span>
+                <span class="diff-line-text">    type: &#39;switch&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">118</span>
+                <span class="diff-line-text">    position: { ...options.position },</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">119</span>
+                <span class="diff-line-text">    interfaces: Array.from({ length: portCount }, (_, i) =&gt; ({</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">120</span>
+                <span class="diff-line-text">      id: nextSandboxInterfaceId(id, i),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">121</span>
+                <span class="diff-line-text">      mac: nextSandboxMac(),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">122</span>
+                <span class="diff-line-text">    })),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">123</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">124</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">125</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">126</span>
+                <span class="diff-line-text">export function makeFirewallConfig(options: DeviceFactoryOptions): DeviceConfig {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">127</span>
+                <span class="diff-line-text">  const id = nextSandboxDeviceId(&#39;firewall&#39;)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">128</span>
+                <span class="diff-line-text">  const ip = options.ip ?? nextSandboxIp()</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">129</span>
+                <span class="diff-line-text">  return {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">130</span>
+                <span class="diff-line-text">    id,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">131</span>
+                <span class="diff-line-text">    name: options.name ?? `Firewall ${globalDeviceCounter}`,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">132</span>
+                <span class="diff-line-text">    type: &#39;firewall&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">133</span>
+                <span class="diff-line-text">    position: { ...options.position },</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">134</span>
+                <span class="diff-line-text">    interfaces: [</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">135</span>
+                <span class="diff-line-text">      {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">136</span>
+                <span class="diff-line-text">        id: nextSandboxInterfaceId(id, 0),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">137</span>
+                <span class="diff-line-text">        mac: nextSandboxMac(),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">138</span>
+                <span class="diff-line-text">        ip,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">139</span>
+                <span class="diff-line-text">        subnetMask: options.subnetMask ?? &#39;255.255.255.0&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">140</span>
+                <span class="diff-line-text">      },</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">141</span>
+                <span class="diff-line-text">      {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">142</span>
+                <span class="diff-line-text">        id: nextSandboxInterfaceId(id, 1),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">143</span>
+                <span class="diff-line-text">        mac: nextSandboxMac(),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">144</span>
+                <span class="diff-line-text">        ip: options.ip ? bumpSubnetIp(ip) : nextSandboxIp(),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">145</span>
+                <span class="diff-line-text">        subnetMask: options.subnetMask ?? &#39;255.255.255.0&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">146</span>
+                <span class="diff-line-text">      },</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">147</span>
+                <span class="diff-line-text">    ],</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">148</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">149</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">150</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">151</span>
+                <span class="diff-line-text">export function makeRouterConfig(options: DeviceFactoryOptions): DeviceConfig {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">152</span>
+                <span class="diff-line-text">  const id = nextSandboxDeviceId(&#39;router&#39;)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">153</span>
+                <span class="diff-line-text">  const ip = options.ip ?? nextSandboxIp()</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">154</span>
+                <span class="diff-line-text">  return {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">155</span>
+                <span class="diff-line-text">    id,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">156</span>
+                <span class="diff-line-text">    name: options.name ?? `Router ${globalDeviceCounter}`,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">157</span>
+                <span class="diff-line-text">    type: &#39;router&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">158</span>
+                <span class="diff-line-text">    position: { ...options.position },</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">159</span>
+                <span class="diff-line-text">    interfaces: [</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">160</span>
+                <span class="diff-line-text">      {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">161</span>
+                <span class="diff-line-text">        id: nextSandboxInterfaceId(id, 0),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">162</span>
+                <span class="diff-line-text">        mac: nextSandboxMac(),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">163</span>
+                <span class="diff-line-text">        ip,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">164</span>
+                <span class="diff-line-text">        subnetMask: options.subnetMask ?? &#39;255.255.255.0&#39;,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">165</span>
+                <span class="diff-line-text">      },</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">166</span>
+                <span class="diff-line-text">    ],</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">167</span>
+                <span class="diff-line-text">    routingTable: [] as RouteEntry[],</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">168</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">169</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">170</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">171</span>
+                <span class="diff-line-text">function bumpSubnetIp(ip: IpAddress): IpAddress {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">172</span>
+                <span class="diff-line-text">  const parts = ip.split(&#39;.&#39;).map(Number)</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">173</span>
+                <span class="diff-line-text">  parts[2] = (parts[2] + 1) % 256</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">174</span>
+                <span class="diff-line-text">  return parts.join(&#39;.&#39;) as IpAddress</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">175</span>
+                <span class="diff-line-text">}</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">176</span>
+                <span class="diff-line-text"> </span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">177</span>
+                <span class="diff-line-text">export function makeInterfaceConfig(deviceId: DeviceId, index: number, ip?: IpAddress, subnetMask?: IpAddress): InterfaceConfig {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">178</span>
+                <span class="diff-line-text">  return {</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">179</span>
+                <span class="diff-line-text">    id: nextSandboxInterfaceId(deviceId, index),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">180</span>
+                <span class="diff-line-text">    mac: nextSandboxMac(),</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">181</span>
+                <span class="diff-line-text">    ip,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">182</span>
+                <span class="diff-line-text">    subnetMask,</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">183</span>
+                <span class="diff-line-text">  }</span>
+              </div><div class="diff-line diff-add">
+                <span class="diff-marker">
+                  +
+                </span>
+                <span class="diff-line-num">184</span>
+                <span class="diff-line-text">}</span>
+              </div>
+          </pre> </div> </details> </div> </section> <!-- 右栏：方法说明 --> <section class="detail-col"> <h2>方法说明</h2> <div class="method-card"> <h3>决策结论</h3> <p><strong>B. 预设+轻量编辑</strong></p> <p>在预设基础上提供轻量编辑能力，平衡教学价值与实现成本。</p> <h3>选项对比</h3> <ul class="options-list"> <li class=""> <strong>A. 只读预设+拖拽</strong> — 引擎零改动，Simulator 无需动态 API，但玩家只能看不能改 </li><li class="selected-option"> <strong>B. 预设+轻量编辑</strong> — Simulator 需要 addDevice/removeDevice/addLink/removeLink/moveDevice/toJson，是全部引擎变更中最复杂的一项 </li><li class=""> <strong>C. 自由搭建</strong> — 需要完整的设备参数编辑、任意接口创建/删除、路由表配置等，改动量最大 </li> </ul>  <h3>影响文件</h3> <ul class="file-list"> <li><code>src/engine/Simulator.ts</code></li><li><code>src/engine/Device.ts</code></li><li><code>src/engine/factories.ts</code></li><li><code>src/engine/Link.ts</code></li> </ul>   <h3>未解决的尾巴</h3> <p>设备接口数量在沙盒中固定（主机 1 个、交换机 4 个），完整版需要动态添加/删除接口的能力。</p>  </div> <div class="method-card"> <h3>入口点</h3> <ul class="entry-list"> <li> <span class="entry-type">method</span> 范围取舍 · <code>method.scope_tradeoff</code> </li><li> <span class="entry-type">timeline</span> M9 里程碑 · <code>phase.m9</code> </li><li> <span class="entry-type">theme</span> 技术主题 · <code>theme.engine</code> </li> </ul> </div> <div class="method-card"> <h3>审核备注</h3> <p>Auto-generated from v0.1 decision point. Review fragment anchors and tag assignments.</p> </div> </section> </div>  </main> </body></html>

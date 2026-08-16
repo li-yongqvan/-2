@@ -1,0 +1,33 @@
+{
+  "baseUrl": "https://li-yongqvan.github.io/cyber-game",
+  "timestamp": "2026-08-16T07:40:09.168Z",
+  "checks": [
+    {
+      "name": "homepage-levels-and-badges",
+      "url": "https://li-yongqvan.github.io/cyber-game/",
+      "passed": true,
+      "signals": {
+        "hasTitle": true,
+        "hasSandboxButton": true,
+        "hasArpLevel": true,
+        "hasLockIcon": true,
+        "bodyLength": 98
+      }
+    },
+    {
+      "name": "sandbox-page-render",
+      "url": "https://li-yongqvan.github.io/cyber-game/sandbox (client-side navigation)",
+      "passed": true,
+      "signals": {
+        "hasSandboxText": true,
+        "hasDeviceText": true,
+        "hasStartText": true,
+        "bodyLength": 157
+      }
+    }
+  ],
+  "screenshots": {
+    "homepage": "homepage.png",
+    "sandbox": "sandbox.png"
+  }
+}
