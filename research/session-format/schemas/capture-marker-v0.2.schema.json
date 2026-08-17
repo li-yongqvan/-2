@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/capture-marker-v0.2.schema.json",
+  "title": "AI Collaboration Experience Package - Capture Marker v0.2",
+  "description": "A lightweight, in-session signal that a conversation moment may be experience-worthy. Prototype / v0.2.",
+  "type": "object",
+  "required": [
+    "marker_id",
+    "marker_type",
+    "session_id",
+    "timestamp",
+    "summary",
+    "source"
+  ],
+  "properties": {
+    "marker_id": {
+      "type": "string",
+      "pattern": "^cm-[a-z0-9]+(?:-[a-z0-9]+)*-[0-9]+$",
+      "description": "Globally unique marker identifier"
+    },
+    "marker_type": {
+      "type": "string",
+      "enum": ["insight", "capture", "question", "correction"],
+      "description": "Inline tag vs structured skill capture"
+    },
+    "session_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Claude Code session UUID"
+    },
+    "anchor_message_uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Most representative message UUID for this marker"
+    },
+    "anchor_confidence": {
+      "type": "string",
+      "enum": ["exact", "nearest", "unresolved"],
+      "description": "How the anchor_message_uuid was determined"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the marker was created"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 280,
+      "description": "One-line human-readable summary"
+    },
+    "method_tag": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "task_definition",
+        "method_selection",
+        "scope_tradeoff",
+        "context_injection",
+        "prompt_refinement",
+        "constraint_declaration",
+        "course_correction",
+        "acceptance_termination"
+      ],
+      "description": "Optional method dimension from 8-category taxonomy"
+    },
+    "theme_tag": {
+      "type": ["string", "null"],
+      "description": "Optional technical theme"
+    },
+    "source": {
+      "type": "string",
+      "enum": ["inline", "skill", "manual"],
+      "description": "How the marker was created"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Reviewer notes or caveats"
+    }
+  },
+  "additionalProperties": false
+}

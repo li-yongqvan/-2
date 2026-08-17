@@ -82,6 +82,14 @@
         "additionalProperties": false
       }
     },
+    "candidate_markers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^cm-[a-z0-9]+(?:-[a-z0-9]+)*-[0-9]+$"
+      },
+      "description": "Optional capture marker IDs that contributed to this unit"
+    },
     "related_unit_ids": {
       "type": "array",
       "items": {

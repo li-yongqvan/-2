@@ -88,7 +88,9 @@ export interface DecisionPoint {
   experience_unit_id: string;
 }
 
-export const experienceUnits: ExperienceUnit[] = readJsonl('experience-units-v0.2.jsonl');
+// Use the reviewed sidecar as the authoritative source for the consumer site.
+// It contains the latest review_status values (draft / reviewed / approved / rejected).
+export const experienceUnits: ExperienceUnit[] = readJsonl('experience-units-reviewed-v0.2.jsonl');
 export const sessionFragments: SessionFragment[] = readJsonl('session-fragments-v0.2.jsonl');
 export const gitHunkEvidence: GitHunkEvidence[] = readJsonl('git-hunk-evidence-v0.2.jsonl');
 export const decisionPoints: DecisionPoint[] = readJsonl('decision-points-v0.2.jsonl');

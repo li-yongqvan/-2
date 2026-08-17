@@ -2,6 +2,60 @@
 
 `scripts/` 目录包含从 Claude Code 会话到结构化经验包的可复用批处理脚本。
 
+## `scripts/capture_m2_demo.py`
+
+**用途**：M2 端到端演示脚本，从合成会话 + `/capture` sidecar 生成完整经验包产物（tags、fragments、decision points、experience units、package manifest），验证 marker → extract → review → ExperienceUnit 闭环。
+
+**运行**：
+```bash
+python scripts/capture_m2_demo.py
+```
+
+**输出**：`data/samples/capture-mechanism-demo/`。
+
+---
+
+## `scripts/extract_capture_markers.py`
+
+**用途**：从脱敏后的会话 JSONL 中提取 `#insight` 内联标签和 `/capture` skill 侧载 markers，合并为 `capture-markers-v0.2.jsonl`。
+
+**输入**：
+- `--session`：scrubber 输出的 `*-scrubbed.jsonl`
+- `--sidecar`（可选）：`~/.claude/projects/<project>/<sessionId>-capture-markers.jsonl`
+
+**输出**：`capture-markers-v0.2.jsonl`。
+
+**示例**：
+```bash
+python scripts/extract_capture_markers.py \
+  --session data/samples/cyber-game-m9/session-be0044d7-scrubbed.jsonl \
+  --sidecar ~/.claude/projects/C--Users-liyongquan--2/be0044d7-capture-markers.jsonl \
+  --output data/samples/cyber-game-m9/capture-markers-v0.2.jsonl
+```
+
+## `/capture` skill
+
+**用途**：在对话中捕获 assistant 消息或带 richer metadata 的洞察。
+
+**安装**：
+```bash
+python scripts/install-capture-skill.py
+```
+
+**使用**：在 Claude Code 中输入 `/capture`，按提示回答 3–4 个问题即可。
+
+**侧载文件**：`~/.claude/projects/<project>/<sessionId>-capture-markers.jsonl`，会在 `extract_capture_markers.py` 阶段与会话中的 `#insight` 合并。
+
+## `scripts/install-capture-skill.py`
+
+**用途**：把仓库中的 `.claude/skills/capture/` 安装到 `~/.claude/skills/capture/`，实现全局可用。
+
+**示例**：
+```bash
+python scripts/install-capture-skill.py
+python scripts/install-capture-skill.py --symlink  # 用符号链接保持与仓库同步
+```
+
 ## `scripts/scrubber.py`
 
 **用途**：脱敏 Claude Code 本地会话 JSONL 文件。
@@ -12,8 +66,9 @@
 - git 邮箱替换为 `<GIT_EMAIL>`
 - 文件历史快照替换为占位符
 - 服务器凭据等敏感值按 `scrubbing-manifest.json` 规则替换
+- 如果提供 `--sidecar-input`，也会对 `/capture` markers 做同样脱敏
 
-**输出**：`*-scrubbed.jsonl`。
+**输出**：`*-scrubbed.jsonl` 和可选的 `*-capture-markers-scrubbed.jsonl`。
 
 ## `scripts/generate_decision_points.py`
 
