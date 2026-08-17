@@ -1,0 +1,204 @@
+---
+import Base from '../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL ?? '/';
+---
+
+<Base title="搜索经验单元">
+  <section class="search-hero">
+    <h1>搜索经验单元</h1>
+    <p class="lead">在已发布的内容中查找决策、对话片段与技术主题。</p>
+  </section>
+
+  <div class="search-box">
+    <label for="search-input" class="visually-hidden">搜索关键词</label>
+    <input
+      id="search-input"
+      type="search"
+      placeholder="输入关键词，例如「范围取舍」、「状态管理」、「grill-me」…"
+      autocomplete="off"
+      data-base={base}
+    />
+    <span class="search-hint">按 Enter 跳转首个结果</span>
+  </div>
+
+  <div id="search-status" class="search-status" aria-live="polite"></div>
+
+  <section id="search-results" class="search-results">
+    <!-- Results rendered by client-side script. -->
+  </section>
+</Base>
+
+<script>
+  type SearchDoc = {
+    unit_id: string;
+    slice_id: string;
+    slice_type: 'unit' | 'decision' | 'fragment' | 'tag';
+    title: string;
+    summary: string;
+    text: string;
+    tags: string[];
+    url: string;
+  };
+
+  const input = document.getElementById('search-input') as HTMLInputElement | null;
+  const resultsEl = document.getElementById('search-results');
+  const statusEl = document.getElementById('search-status');
+  const base = input?.dataset.base ?? '/';
+
+  let index: SearchDoc[] | null = null;
+  let indexError = false;
+
+  function normalize(text: string): string {
+    return text
+      .toLowerCase()
+      .replace(/[\s　]+/g, ' ')
+      .trim();
+  }
+
+  function tokenize(text: string): string[] {
+    return normalize(text)
+      .split(/[\s,，.;:：!?！?、]/)
+      .filter((t) => t.length > 0);
+  }
+
+  function score(doc: SearchDoc, terms: string[]): number {
+    const haystack = normalize(doc.text + ' ' + doc.title + ' ' + doc.summary + ' ' + doc.tags.join(' '));
+    let hits = 0;
+    for (const term of terms) {
+      if (term.length === 0) continue;
+      // Count non-overlapping occurrences to reward documents that hit multiple terms.
+      let pos = 0;
+      while ((pos = haystack.indexOf(term, pos)) !== -1) {
+        hits += 1;
+        pos += term.length;
+      }
+    }
+    return hits;
+  }
+
+  function renderResults(query: string, docs: SearchDoc[]) {
+    if (!resultsEl || !statusEl) return;
+    resultsEl.innerHTML = '';
+
+    const terms = tokenize(query);
+    if (terms.length === 0) {
+      statusEl.textContent = '';
+      return;
+    }
+
+    const ranked = docs
+      .map((doc) => ({ doc, hits: score(doc, terms) }))
+      .filter((r) => r.hits > 0)
+      .sort((a, b) => b.hits - a.hits || a.doc.title.localeCompare(b.doc.title));
+
+    statusEl.textContent = `找到 ${ranked.length} 条与「${query}」相关的切片`;
+
+    if (ranked.length === 0) {
+      resultsEl.innerHTML = `
+        <div class="empty-state">
+          未找到匹配结果。试试更通用的词，例如「方法」、「状态」、「测试」。
+        </div>
+      `;
+      return;
+    }
+
+    const list = document.createElement('div');
+    list.className = 'result-list';
+
+    for (const { doc } of ranked) {
+      const typeLabel = {
+        unit: '经验单元',
+        decision: '决策点',
+        fragment: '对话片段',
+        tag: '标签',
+      }[doc.slice_type];
+
+      const article = document.createElement('article');
+      article.className = 'result-card';
+      article.innerHTML = `
+        <div class="result-meta">
+          <span class="result-type">${typeLabel}</span>
+          <span class="result-unit">${doc.unit_id}</span>
+        </div>
+        <h2 class="result-title">
+          <a href="${base}${doc.url}">${escapeHtml(doc.title)}</a>
+        </h2>
+        <p class="result-summary">${escapeHtml(truncate(doc.summary, 160))}</p>
+        ${doc.tags.length > 0 ? `
+          <div class="result-tags">
+            ${doc.tags.map((t) => `<span class="tag-pill">${escapeHtml(t)}</span>`).join('')}
+          </div>
+        ` : ''}
+      `;
+      list.appendChild(article);
+    }
+
+    resultsEl.appendChild(list);
+  }
+
+  function escapeHtml(str: string): string {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function truncate(str: string, max: number): string {
+    if (str.length <= max) return str;
+    return str.slice(0, max).replace(/\s+\S*$/, '') + '…';
+  }
+
+  async function loadIndex(): Promise<SearchDoc[]> {
+    if (index) return index;
+    const res = await fetch(`${base}search-index.json`);
+    if (!res.ok) throw new Error(`Failed to load search index: ${res.status}`);
+    index = (await res.json()) as SearchDoc[];
+    return index;
+  }
+
+  async function handleInput() {
+    if (!input || !statusEl) return;
+    const query = input.value.trim();
+
+    if (!query) {
+      if (resultsEl) resultsEl.innerHTML = '';
+      statusEl.textContent = '';
+      return;
+    }
+
+    statusEl.textContent = '搜索中…';
+
+    try {
+      const docs = await loadIndex();
+      renderResults(query, docs);
+    } catch (err) {
+      indexError = true;
+      statusEl.textContent = '搜索索引加载失败，请稍后重试。';
+      if (resultsEl) resultsEl.innerHTML = '';
+      // eslint-disable-next-line no-console
+      console.error(err);
+    }
+  }
+
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key !== 'Enter' || !resultsEl) return;
+    const firstLink = resultsEl.querySelector('.result-title a') as HTMLAnchorElement | null;
+    if (firstLink) {
+      e.preventDefault();
+      window.location.href = firstLink.href;
+    }
+  }
+
+  input?.addEventListener('input', handleInput);
+  input?.addEventListener('keydown', handleKeydown);
+
+  // If the URL contains a ?q= parameter, pre-fill and search.
+  const params = new URLSearchParams(window.location.search);
+  const initialQuery = params.get('q')?.trim();
+  if (initialQuery && input) {
+    input.value = initialQuery;
+    handleInput();
+  }
+</script>
