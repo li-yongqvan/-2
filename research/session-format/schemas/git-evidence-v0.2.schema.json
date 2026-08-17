@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/git-evidence-v0.2.schema.json",
+  "$id": "https://github.com/li-yongqvan/experience-pack/research/session-format/schemas/git-evidence-v0.2.schema.json",
   "title": "AI Collaboration Experience Package - Git Evidence v0.2",
   "description": "Code change evidence pointing to a commit, file, or hunk. Prototype / v0.2.",
   "type": "object",

@@ -21,7 +21,7 @@ AI 协作者经验包项目已解决「捕获机制」雾（#1 wayfinder map 中
 
 ## Key Artifacts (read these, do not duplicate)
 
-- **Wayfinder 地图**: GitHub issue [#1](https://github.com/li-yongqvan/-2/issues/1)
+- **Wayfinder 地图**: GitHub issue [#1](https://github.com/li-yongqvan/experience-pack/issues/1)
   - 最终形态 fog 在 "Not yet specified" 中
 - **已完成的捕获机制**: `docs/decisions/0011-capture-mechanism.md`
   - Status: **Accepted / M2 Completed**

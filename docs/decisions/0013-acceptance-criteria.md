@@ -4,7 +4,7 @@
 
 **Accepted** — 经 `/grill-me` 与用户对齐，作为 #15 跟踪。
 
-- 父地图：[#1 AI 协作者经验包 · Wayfinder](https://github.com/li-yongqvan/-2/issues/1)
+- 父地图：[#1 AI 协作者经验包 · Wayfinder](https://github.com/li-yongqvan/experience-pack/issues/1)
 - 解决 fog：**一个经验包做到什么程度算完成、算可发布**
 - 前置决策：[#8 MVP 范围](0008-mvp-scope.md)、[#9 审核工作流](0009-review-workflow-prototype.md)、[#11 捕获机制](0011-capture-mechanism.md)、[#12 最终形态](0012-final-form.md)
 - 关联流程：[`docs/processes/map-maintenance.md`](../processes/map-maintenance.md)
@@ -192,7 +192,7 @@ python scripts/publish_experience_package.py --version v0.3.0
 
 ## Related Issues
 
-- Parent map: [#1](https://github.com/li-yongqvan/-2/issues/1)
+- Parent map: [#1](https://github.com/li-yongqvan/experience-pack/issues/1)
 - This decision: **#15**
-- Blocked by: [#2](https://github.com/li-yongqvan/-2/issues/2)、[#6](https://github.com/li-yongqvan/-2/issues/6)、[#9](https://github.com/li-yongqvan/-2/issues/9)、[#13](https://github.com/li-yongqvan/-2/issues/13)
-- Unblocks: [#14](https://github.com/li-yongqvan/-2/issues/14) 最终形态第一阶段搜索功能的发布质量基础
+- Blocked by: [#2](https://github.com/li-yongqvan/experience-pack/issues/2)、[#6](https://github.com/li-yongqvan/experience-pack/issues/6)、[#9](https://github.com/li-yongqvan/experience-pack/issues/9)、[#13](https://github.com/li-yongqvan/experience-pack/issues/13)
+- Unblocks: [#14](https://github.com/li-yongqvan/experience-pack/issues/14) 最终形态第一阶段搜索功能的发布质量基础

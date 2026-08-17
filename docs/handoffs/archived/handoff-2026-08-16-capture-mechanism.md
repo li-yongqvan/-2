@@ -15,7 +15,7 @@
   - 次机制：`/capture` skill，写入侧载 marker 文件
   - 新增产物：`capture-marker-v0.2.schema.json` + `capture-markers-v0.2.jsonl`
   - 核心原则：capture 只是信号，仍需走 grilling / review-workflow 才能成为正式决策点
-- **Wayfinder 地图**: GitHub issue [#1](https://github.com/li-yongqvan/-2/issues/1)
+- **Wayfinder 地图**: GitHub issue [#1](https://github.com/li-yongqvan/experience-pack/issues/1)
   - 捕获机制 fog 在 "Not yet specified" 中
 - **现有 grilling 约定**: `C:\Users\liyongquan\.claude\projects\C--Users-liyongquan\memory\grilling-auto-record-convention.md`
   - grilling 用于高歧义结构化共识；capture 用于 opportunistic 洞察标记

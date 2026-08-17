@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/decision-point-v0.1.schema.json",
+  "$id": "https://github.com/li-yongqvan/experience-pack/research/session-format/schemas/decision-point-v0.1.schema.json",
   "title": "AI Collaboration Experience Package - Decision Point v0.1",
   "description": "Intermediate data structure for a single decision point extracted from human-AI collaboration sessions. Prototype / v0.1 - derived from cyber-game M8-M9 sample.",
   "type": "object",

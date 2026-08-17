@@ -1,7 +1,7 @@
 # Claude Code 本地会话文件格式研究报告
 
 **研究问题**：Claude Code 本地会话文件格式是什么？能从中提取哪些字段？  
-**对应工单**：[li-yongqvan/-2#3](https://github.com/li-yongqvan/-2/issues/3)  
+**对应工单**：[li-yongqvan/experience-pack#3](https://github.com/li-yongqvan/experience-pack/issues/3)  
 **研究分支**：`research/session-format`  
 **日期**：2026-08-13
 

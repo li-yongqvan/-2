@@ -20,7 +20,7 @@
 - **已部署站点**: https://li-yongquan.github.io/-2/dual-entry/
 - **地图维护流程**: `docs/processes/map-maintenance.md`
   - #14 进度变化时需同步 #1 body
-- **Wayfinder 地图**: GitHub issue [#1](https://github.com/li-yongqvan/-2/issues/1)
+- **Wayfinder 地图**: GitHub issue [#1](https://github.com/li-yongqvan/experience-pack/issues/1)
   - 最终形态已移到 Decisions so far；#14 应在 Frontier tickets 中
 
 ## Suggested Skills for Next Agent

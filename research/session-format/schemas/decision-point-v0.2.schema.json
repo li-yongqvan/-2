@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/decision-point-v0.2.schema.json",
+  "$id": "https://github.com/li-yongqvan/experience-pack/research/session-format/schemas/decision-point-v0.2.schema.json",
   "title": "AI Collaboration Experience Package - Decision Point v0.2",
   "description": "Decision point with optional back-references to experience unit, session fragments, git evidence, and tags. Prototype / v0.2.",
   "type": "object",

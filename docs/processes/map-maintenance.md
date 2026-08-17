@@ -2,7 +2,7 @@
 
 **Status**: P1 Process — 已生效，需严格执行  
 **Owner**: Wayfinder 维护者（当前为项目作者 + AI 协作者）  
-**关联**: [#1 Wayfinder Map](https://github.com/li-yongqvan/-2/issues/1), `memory/keep-wayfinder-map-body-in-sync.md`
+**关联**: [#1 Wayfinder Map](https://github.com/li-yongqvan/experience-pack/issues/1), `memory/keep-wayfinder-map-body-in-sync.md`
 
 ---
 
@@ -133,7 +133,7 @@
 
 ## Related Artifacts
 
-- `#1` Wayfinder Map: https://github.com/li-yongqvan/-2/issues/1
+- `#1` Wayfinder Map: https://github.com/li-yongqvan/experience-pack/issues/1
 - `memory/keep-wayfinder-map-body-in-sync.md` — 本流程的前身记忆
 - `docs/decisions/0008-mvp-scope.md` — wayfinder MVP 范围决策
 - `docs/handoffs/` — 各阶段 handoff 文档

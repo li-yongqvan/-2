@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/git-hunk-evidence-v0.2.schema.json",
+  "$id": "https://github.com/li-yongqvan/experience-pack/research/session-format/schemas/git-hunk-evidence-v0.2.schema.json",
   "title": "AI Collaboration Experience Package - Git Hunk Evidence v0.2",
   "description": "Hunk-level code change evidence. Splits out from GitEvidence so one file evidence can produce multiple hunk evidences. Prototype / v0.2.",
   "type": "object",

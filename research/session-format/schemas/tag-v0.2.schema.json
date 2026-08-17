@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/tag-v0.2.schema.json",
+  "$id": "https://github.com/li-yongqvan/experience-pack/research/session-format/schemas/tag-v0.2.schema.json",
   "title": "AI Collaboration Experience Package - Tag Taxonomy v0.2",
   "description": "Tag axes and tag definitions supporting dual-entry browsing (method theme + project timeline). Prototype / v0.2.",
   "type": "object",

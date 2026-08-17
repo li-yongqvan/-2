@@ -1,6 +1,6 @@
 # 人工审核工作流 — Grill-me 决策记录
 
-> 关联 Issue: [#6 · 人工审核工作流设计](https://github.com/li-yongqvan/-2/issues/6)  
+> 关联 Issue: [#6 · 人工审核工作流设计](https://github.com/li-yongqvan/experience-pack/issues/6)  
 > 记录时间: 2026-08-14  
 > 决策数量: 4  
 

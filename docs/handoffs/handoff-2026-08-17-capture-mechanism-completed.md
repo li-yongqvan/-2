@@ -171,7 +171,7 @@ python research/session-format/prototypes/validate-experience-v0.2.py
 
 ## 7. 相关链接
 
-- GitHub issue（实现记录）：[#13](https://github.com/li-yongqvan/-2/issues/13)
+- GitHub issue（实现记录）：[#13](https://github.com/li-yongqvan/experience-pack/issues/13)
 - 设计决策：`docs/decisions/0011-capture-mechanism.md`
 - grill-me 决策记录：`C:\Users\liyongquan\.claude\projects\C--Users-liyongquan\memory\grilling-decisions\0011-capture-mechanism-decisions.md`
 - Schema：`research/session-format/schemas/capture-marker-v0.2.schema.json`

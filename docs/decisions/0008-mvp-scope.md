@@ -161,6 +161,6 @@ Git commit 范围（M7-M9 被 squash 为一个里程碑提交）：
 
 ## Related Issues
 
-- Parent map: [#1](https://github.com/li-yongqvan/-2/issues/1)
-- This decision: [#8](https://github.com/li-yongqvan/-2/issues/8)
-- Unblocked: [#2](https://github.com/li-yongqvan/-2/issues/2), [#4](https://github.com/li-yongqvan/-2/issues/4), [#6](https://github.com/li-yongqvan/-2/issues/6), [#7](https://github.com/li-yongqvan/-2/issues/7)
+- Parent map: [#1](https://github.com/li-yongqvan/experience-pack/issues/1)
+- This decision: [#8](https://github.com/li-yongqvan/experience-pack/issues/8)
+- Unblocked: [#2](https://github.com/li-yongqvan/experience-pack/issues/2), [#4](https://github.com/li-yongqvan/experience-pack/issues/4), [#6](https://github.com/li-yongqvan/experience-pack/issues/6), [#7](https://github.com/li-yongqvan/experience-pack/issues/7)

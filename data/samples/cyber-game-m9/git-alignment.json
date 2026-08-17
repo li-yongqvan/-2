@@ -3,7 +3,7 @@
   "session_title": "阅读HANDOFF.md文档，执行M9的规划",
   "session_date": "2026-07-29",
   "repo_path": "C:\\Users\\liyongquan\\cyber-game",
-  "repo_remote": "https://github.com/li-yongqvan/-2",
+  "repo_remote": "https://github.com/li-yongqvan/cyber-game",
   "commit_range": {
     "from": "9da18db",
     "from_message": "feat: Milestone 6 - TCP SYN Flood \u0026 SYN Cookie defense",

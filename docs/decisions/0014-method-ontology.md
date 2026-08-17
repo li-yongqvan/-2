@@ -4,9 +4,9 @@
 
 **Accepted** — 经 `/grill-me` 与用户对齐，作为 #18 跟踪。
 
-- 父地图：[#1 AI 协作者经验包 · Wayfinder](https://github.com/li-yongqvan/-2/issues/1)
+- 父地图：[#1 AI 协作者经验包 · Wayfinder](https://github.com/li-yongqvan/experience-pack/issues/1)
 - 解决 fog：**完整的“协作方法”清单是什么，以及如何与标签、捕获机制联动**
-- 前置决策：[#5 决策点分类](https://github.com/li-yongqvan/-2/issues/5)、[#13 捕获机制](0011-capture-mechanism.md)、[#14 最终形态](0012-final-form.md)、[#15 验收标准](0013-acceptance-criteria.md)
+- 前置决策：[#5 决策点分类](https://github.com/li-yongqvan/experience-pack/issues/5)、[#13 捕获机制](0011-capture-mechanism.md)、[#14 最终形态](0012-final-form.md)、[#15 验收标准](0013-acceptance-criteria.md)
 - 关联流程：[`docs/processes/map-maintenance.md`](../processes/map-maintenance.md)
 
 ---
@@ -17,7 +17,7 @@
 
 > 完整的“协作方法”清单是什么？方法标签如何与 `#insight[method=...]` 和 `/capture` skill 联动？方法本体最终输出是什么？
 
-现有 8 类决策方法来自 [#5](https://github.com/li-yongqvan/-2/issues/5)：任务定义、方法选择、范围取舍、上下文注入、提示精炼、约束声明、方向修正、验收/终止。这些 tag 同时被 `decision-point-v0.2.schema.json`、`capture-marker-v0.2.schema.json` 和 `tags-v0.2.json` 使用。
+现有 8 类决策方法来自 [#5](https://github.com/li-yongqvan/experience-pack/issues/5)：任务定义、方法选择、范围取舍、上下文注入、提示精炼、约束声明、方向修正、验收/终止。这些 tag 同时被 `decision-point-v0.2.schema.json`、`capture-marker-v0.2.schema.json` 和 `tags-v0.2.json` 使用。
 
 本决策通过与用户对齐，确定方法本体的范围、层级、来源与最终产物。
 
@@ -37,7 +37,7 @@
 
 ## Method Axis（8 + 0）
 
-保持 [#5](https://github.com/li-yongqvan/-2/issues/5) 定义的 8 类：
+保持 [#5](https://github.com/li-yongqvan/experience-pack/issues/5) 定义的 8 类：
 
 | tag id | 中文 | 英文 |
 |---|---|---|
@@ -136,7 +136,7 @@
 
 ## Related Issues
 
-- Parent map: [#1](https://github.com/li-yongqvan/-2/issues/1)
+- Parent map: [#1](https://github.com/li-yongqvan/experience-pack/issues/1)
 - This decision: **#18**
-- Blocked by: [#5](https://github.com/li-yongqvan/-2/issues/5)、[#13](https://github.com/li-yongqvan/-2/issues/13)、[#14](https://github.com/li-yongqvan/-2/issues/14)、[#15](https://github.com/li-yongqvan/-2/issues/15)
+- Blocked by: [#5](https://github.com/li-yongqvan/experience-pack/issues/5)、[#13](https://github.com/li-yongqvan/experience-pack/issues/13)、[#14](https://github.com/li-yongqvan/experience-pack/issues/14)、[#15](https://github.com/li-yongqvan/experience-pack/issues/15)
 - Unblocks: #14 最终形态的搜索聚合、#10 police 第二经验包的标签使用

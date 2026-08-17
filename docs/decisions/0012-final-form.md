@@ -4,10 +4,10 @@
 
 **Accepted** — 经 `/grill-me` 与用户达成一致。采用「最终形态愿景 + 分阶段推进」策略，不一步到位。
 
-- 父地图：[#1 AI 协作者经验包 · Wayfinder](https://github.com/li-yongqvan/-2/issues/1)
+- 父地图：[#1 AI 协作者经验包 · Wayfinder](https://github.com/li-yongqvan/experience-pack/issues/1)
 - 解决 fog：**经验包的最终发布形态**
 - 前置决策：[#8 MVP 范围](0008-mvp-scope.md)、[#11 捕获机制](0011-capture-mechanism.md)
-- 实现任务：[#14](https://github.com/li-yongqvan/-2/issues/14)
+- 实现任务：[#14](https://github.com/li-yongqvan/experience-pack/issues/14)
 
 ---
 
@@ -141,7 +141,7 @@
 
 ## Related Issues
 
-- Parent map: [#1](https://github.com/li-yongqvan/-2/issues/1)
+- Parent map: [#1](https://github.com/li-yongqvan/experience-pack/issues/1)
 - This decision: **#14**（实现记录与验证）
-- Blocked by: [#8](https://github.com/li-yongqvan/-2/issues/8)、[#11](https://github.com/li-yongqvan/-2/issues/11)
+- Blocked by: [#8](https://github.com/li-yongqvan/experience-pack/issues/8)、[#11](https://github.com/li-yongqvan/experience-pack/issues/11)
 - Unblocks: 第一阶段搜索功能实施

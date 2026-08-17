@@ -10,7 +10,7 @@
 - **经验包简介**：[packages/experience-m9-grilling-scope-slice/brief.md](/packages/experience-m9-grilling-scope-slice/brief.md)
 - **目标 Demo**：[https://li-yongqvan.github.io/cyber-game/](https://li-yongqvan.github.io/cyber-game/)
 - **样本数据**：[data/samples/cyber-game-m9/](/data/samples/cyber-game-m9/)
-- **发布 ticket**：[#9](https://github.com/li-yongqvan/-2/issues/9)
+- **发布 ticket**：[#9](https://github.com/li-yongqvan/experience-pack/issues/9)
 
 ### 决策记录
 

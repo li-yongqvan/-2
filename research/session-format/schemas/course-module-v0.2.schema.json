@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/course-module-v0.2.schema.json",
+  "$id": "https://github.com/li-yongqvan/experience-pack/research/session-format/schemas/course-module-v0.2.schema.json",
   "title": "AI Collaboration Experience Package - Course Module v0.2",
   "description": "A themed learning module composed of experience units. Prototype / v0.2.",
   "type": "object",

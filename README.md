@@ -11,7 +11,7 @@
 - **课程简介**：[`packages/experience-m9-grilling-scope-slice/brief.md`](packages/experience-m9-grilling-scope-slice/brief.md)
 - **样本数据**：[`data/samples/cyber-game-m9/`](data/samples/cyber-game-m9/)
 - **目标 Demo**：https://li-yongqvan.github.io/cyber-game/
-- **发布 ticket**：[#9](https://github.com/li-yongqvan/-2/issues/9)
+- **发布 ticket**：[#9](https://github.com/li-yongqvan/experience-pack/issues/9)
 - **决策记录**：
   - [`docs/decisions/0008-mvp-scope.md`](docs/decisions/0008-mvp-scope.md) — 首包 MVP 范围
   - [`docs/decisions/0009-review-workflow-prototype.md`](docs/decisions/0009-review-workflow-prototype.md) — 人工审核工作流
@@ -37,7 +37,7 @@
 
 ## 当前 frontier
 
-- [#9](https://github.com/li-yongqvan/-2/issues/9) · 把 cyber-game M8-M9 经验包打磨到可发布 — **已完成 ✅**
-- [#10](https://github.com/li-yongqvan/-2/issues/10) · 用同样方法处理 police 项目作为第二经验包 — 待开始
+- [#9](https://github.com/li-yongqvan/experience-pack/issues/9) · 把 cyber-game M8-M9 经验包打磨到可发布 — **已完成 ✅**
+- [#10](https://github.com/li-yongqvan/experience-pack/issues/10) · 用同样方法处理 police 项目作为第二经验包 — 待开始
 
-详情见 Wayfinder 地图：[#1](https://github.com/li-yongqvan/-2/issues/1)
+详情见 Wayfinder 地图：[#1](https://github.com/li-yongqvan/experience-pack/issues/1)

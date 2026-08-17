@@ -20,7 +20,7 @@ AI 协作者经验包项目已解决两片 fog：
 
 ## Key Artifacts (read these, do not duplicate)
 
-- **Wayfinder 地图**: GitHub issue [#1](https://github.com/li-yongqvan/-2/issues/1)
+- **Wayfinder 地图**: GitHub issue [#1](https://github.com/li-yongqvan/experience-pack/issues/1)
   - 验收标准 fog 在 "Not yet specified" 中
 - **捕获机制决策**: `docs/decisions/0011-capture-mechanism.md`
   - Status: Accepted / M2 Completed

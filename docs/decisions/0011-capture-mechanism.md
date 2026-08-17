@@ -4,7 +4,7 @@
 
 **Accepted / M2 Completed** — schema、提取脚本、skill、安装脚本已就绪，并在 `data/samples/capture-mechanism-demo/` 跑通端到端闭环（marker → extract → review → ExperienceUnit）。
 
-- 父地图：[#1 AI 协作者经验包 · Wayfinder](https://github.com/li-yongqvan/-2/issues/1)
+- 父地图：[#1 AI 协作者经验包 · Wayfinder](https://github.com/li-yongqvan/experience-pack/issues/1)
 - 解决 fog：**对话过程中快速标记「这是一条经验」的机制**
 - 前置决策：[#8 MVP 范围](0008-mvp-scope.md)、[#9 审核工作流](0009-review-workflow-prototype.md)、[#12 锚点精确修复](0010-m9-playwright-verification.md#5-v03-锚点-uuid-精确修复12)
 - 约定参考：`grilling-auto-record-convention.md`
@@ -112,7 +112,7 @@ Skill 执行：
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/li-yongqvan/-2/research/session-format/schemas/capture-marker-v0.2.schema.json",
+  "$id": "https://github.com/li-yongqvan/experience-pack/research/session-format/schemas/capture-marker-v0.2.schema.json",
   "title": "AI Collaboration Experience Package - Capture Marker v0.2",
   "description": "A lightweight, in-session signal that a conversation moment may be experience-worthy. Prototype / v0.2.",
   "type": "object",
@@ -324,7 +324,7 @@ decision-points-v0.2.jsonl      ExperienceUnit（含 candidate_markers）
 
 ## Related Issues
 
-- Parent map: [#1](https://github.com/li-yongqvan/-2/issues/1)
+- Parent map: [#1](https://github.com/li-yongqvan/experience-pack/issues/1)
 - This decision: **#13**（实现记录与验证）
-- Blocked by: [#2](https://github.com/li-yongqvan/-2/issues/2)、[#6](https://github.com/li-yongqvan/-2/issues/6)
-- Unblocks: [#10](https://github.com/li-yongqvan/-2/issues/10) 第二经验包 police 的前置数据收集
+- Blocked by: [#2](https://github.com/li-yongqvan/experience-pack/issues/2)、[#6](https://github.com/li-yongqvan/experience-pack/issues/6)
+- Unblocks: [#10](https://github.com/li-yongqvan/experience-pack/issues/10) 第二经验包 police 的前置数据收集
