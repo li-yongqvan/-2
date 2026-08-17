@@ -6,7 +6,7 @@
 
 ### 快速入口
 
-- **双入口浏览原型**：[/dual-entry/](/dual-entry/) — 按方法主题或项目时间线浏览 20 个经验单元
+- **双入口浏览原型**：[/dual-entry/](/dual-entry/) — 按方法主题或项目时间线浏览 20 个经验单元（新增 [/dual-entry/search/](/dual-entry/search/) 本地搜索）
 - **经验包简介**：[packages/experience-m9-grilling-scope-slice/brief.md](/packages/experience-m9-grilling-scope-slice/brief.md)
 - **目标 Demo**：[https://li-yongqvan.github.io/cyber-game/](https://li-yongqvan.github.io/cyber-game/)
 - **样本数据**：[data/samples/cyber-game-m9/](/data/samples/cyber-game-m9/)
