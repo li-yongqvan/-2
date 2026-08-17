@@ -129,7 +129,7 @@
 
 ## 后续验证结果（#9 发布阶段补充，2026-08-16）
 
-详见 [`docs/decisions/0010-m9-playwright-verification.md`](/docs/decisions/0010-m9-playwright-verification.md)。
+详见 [`docs/decisions/0010-m9-playwright-verification.md`](/experience-pack/docs/decisions/0010-m9-playwright-verification.md)。
 
 | 检查项 | 结果 |
 |---|---|

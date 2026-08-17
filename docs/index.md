@@ -6,24 +6,24 @@
 
 ### 快速入口
 
-- **双入口浏览原型**：[/dual-entry/](/dual-entry/) — 按方法主题或项目时间线浏览 20 个经验单元（新增 [/dual-entry/search/](/dual-entry/search/) 本地搜索）
-- **经验包简介**：[packages/experience-m9-grilling-scope-slice/brief.md](/packages/experience-m9-grilling-scope-slice/brief.md)
+- **双入口浏览原型**：[/experience-pack/dual-entry/](/experience-pack/dual-entry/) — 按方法主题或项目时间线浏览 20 个经验单元（新增 [/experience-pack/dual-entry/search/](/experience-pack/dual-entry/search/) 本地搜索）
+- **经验包简介**：[packages/experience-m9-grilling-scope-slice/brief.md](/experience-pack/packages/experience-m9-grilling-scope-slice/brief.md)
 - **目标 Demo**：[https://li-yongqvan.github.io/cyber-game/](https://li-yongqvan.github.io/cyber-game/)
-- **样本数据**：[data/samples/cyber-game-m9/](/data/samples/cyber-game-m9/)
+- **样本数据**：[data/samples/cyber-game-m9/](/experience-pack/data/samples/cyber-game-m9/)
 - **发布 ticket**：[#9](https://github.com/li-yongqvan/experience-pack/issues/9)
 
 ### 决策记录
 
 | 编号 | 主题 | 文件 |
 |---|---|---|
-| 0008 | 首包 MVP 范围 | [`docs/decisions/0008-mvp-scope.md`](/docs/decisions/0008-mvp-scope.md) |
-| 0009 | 人工审核工作流原型 | [`docs/decisions/0009-review-workflow-prototype.md`](/docs/decisions/0009-review-workflow-prototype.md) |
-| 0010 | M9 Demo Playwright 验证 | [`docs/decisions/0010-m9-playwright-verification.md`](/docs/decisions/0010-m9-playwright-verification.md) |
+| 0008 | 首包 MVP 范围 | [`docs/decisions/0008-mvp-scope.md`](/experience-pack/docs/decisions/0008-mvp-scope.md) |
+| 0009 | 人工审核工作流原型 | [`docs/decisions/0009-review-workflow-prototype.md`](/experience-pack/docs/decisions/0009-review-workflow-prototype.md) |
+| 0010 | M9 Demo Playwright 验证 | [`docs/decisions/0010-m9-playwright-verification.md`](/experience-pack/docs/decisions/0010-m9-playwright-verification.md) |
 
 ### 索引
 
-- [Schema 索引](/docs/schemas/) — 经验包 v0.2 全部 JSON Schema
-- [工具脚本说明](/docs/tools/) — scrubber、生成器、验证器用法
+- [Schema 索引](/experience-pack/docs/schemas/) — 经验包 v0.2 全部 JSON Schema
+- [工具脚本说明](/experience-pack/docs/tools/) — scrubber、生成器、验证器用法
 
 ### 核心叙事
 

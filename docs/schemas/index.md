@@ -1,6 +1,6 @@
 # Schema 索引
 
-经验包 v0.2 的 JSON Schema 家族，位于 [`research/session-format/schemas/`](/research/session-format/schemas/)。
+经验包 v0.2 的 JSON Schema 家族，位于 [`research/session-format/schemas/`](/experience-pack/research/session-format/schemas/)。
 
 | Schema | 版本 | 用途 |
 |---|---|---|
