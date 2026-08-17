@@ -7,6 +7,11 @@
       "label_zh": "决策方法"
     },
     {
+      "id": "collaboration_pattern",
+      "label_en": "Collaboration Pattern",
+      "label_zh": "协作模式"
+    },
+    {
       "id": "project_phase",
       "label_en": "Project Phase",
       "label_zh": "项目阶段"
@@ -58,6 +63,12 @@
       "axis_id": "theme",
       "label_en": "Testing",
       "label_zh": "Testing"
+    },
+    {
+      "id": "collaboration_pattern.capture",
+      "axis_id": "collaboration_pattern",
+      "label_en": "Capture Mechanism",
+      "label_zh": "捕获机制"
     }
   ]
 }

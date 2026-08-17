@@ -1,0 +1,98 @@
+{
+  "version": "0.2.0",
+  "description": "Authoritative method ontology for AI collaboration experience package. Defines the method and collaboration_pattern axes used by #insight[method=...], /capture skill, decision points, and tag taxonomies.",
+  "axes": {
+    "method": {
+      "label_en": "Decision Method",
+      "label_zh": "决策方法",
+      "description": "The kind of decision being made or the collaborative thinking pattern applied to the content of the insight.",
+      "values": [
+        {
+          "id": "task_definition",
+          "label_en": "Task Definition",
+          "label_zh": "任务定义",
+          "description": "What problem are we solving? Clarifying goals, scope, and success criteria."
+        },
+        {
+          "id": "method_selection",
+          "label_en": "Method Selection",
+          "label_zh": "方法选择",
+          "description": "Choosing among tools, skills, frameworks, or implementation strategies."
+        },
+        {
+          "id": "scope_tradeoff",
+          "label_en": "Scope Tradeoff",
+          "label_zh": "范围取舍",
+          "description": "Deciding what to include, defer, or cut under constraints."
+        },
+        {
+          "id": "context_injection",
+          "label_en": "Context Injection",
+          "label_zh": "上下文注入",
+          "description": "Determining what context (files, conventions, memory) to provide to the AI."
+        },
+        {
+          "id": "prompt_refinement",
+          "label_en": "Prompt Refinement",
+          "label_zh": "提示精炼",
+          "description": "Iterating on wording, structure, or examples to improve AI output."
+        },
+        {
+          "id": "constraint_declaration",
+          "label_en": "Constraint Declaration",
+          "label_zh": "约束声明",
+          "description": "Stating boundaries, non-goals, coding standards, or guardrails."
+        },
+        {
+          "id": "course_correction",
+          "label_en": "Course Correction",
+          "label_zh": "方向修正",
+          "description": "Recognizing drift and redirecting the plan or implementation."
+        },
+        {
+          "id": "acceptance_termination",
+          "label_en": "Acceptance / Termination",
+          "label_zh": "验收/终止",
+          "description": "Deciding when work is done, good enough, or should be stopped."
+        }
+      ]
+    },
+    "collaboration_pattern": {
+      "label_en": "Collaboration Pattern",
+      "label_zh": "协作模式",
+      "description": "The human-AI interaction mechanism through which the insight was produced, distinct from the decision content.",
+      "values": [
+        {
+          "id": "grilling",
+          "label_en": "Grill-me",
+          "label_zh": "Grill-me 追问",
+          "description": "Insight emerged from structured grilling / AskUserQuestion alignment."
+        },
+        {
+          "id": "plan_mode",
+          "label_en": "Plan Mode",
+          "label_zh": "Plan Mode",
+          "description": "Insight emerged from entering plan mode and converging on an implementation plan."
+        },
+        {
+          "id": "prototype",
+          "label_en": "Prototype",
+          "label_zh": "原型验证",
+          "description": "Insight emerged from a throwaway prototype or quick validation spike."
+        },
+        {
+          "id": "capture",
+          "label_en": "Capture Mechanism",
+          "label_zh": "捕获机制",
+          "description": "Insight was explicitly captured via #insight or /capture during a session."
+        },
+        {
+          "id": "review",
+          "label_en": "Review",
+          "label_zh": "审阅",
+          "description": "Insight emerged from code review, decision review, or retrospective inspection."
+        }
+      ]
+    }
+  }
+}

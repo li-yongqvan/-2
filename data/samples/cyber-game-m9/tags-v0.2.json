@@ -7,6 +7,11 @@
       "label_zh": "决策方法"
     },
     {
+      "id": "collaboration_pattern",
+      "label_en": "Collaboration Pattern",
+      "label_zh": "协作模式"
+    },
+    {
       "id": "project_phase",
       "label_en": "Project Phase",
       "label_zh": "项目阶段"
@@ -70,6 +75,36 @@
       "axis_id": "method",
       "label_en": "Acceptance / Termination",
       "label_zh": "验收/终止"
+    },
+    {
+      "id": "collaboration_pattern.grilling",
+      "axis_id": "collaboration_pattern",
+      "label_en": "Grill-me",
+      "label_zh": "Grill-me 追问"
+    },
+    {
+      "id": "collaboration_pattern.plan_mode",
+      "axis_id": "collaboration_pattern",
+      "label_en": "Plan Mode",
+      "label_zh": "Plan Mode"
+    },
+    {
+      "id": "collaboration_pattern.prototype",
+      "axis_id": "collaboration_pattern",
+      "label_en": "Prototype",
+      "label_zh": "原型验证"
+    },
+    {
+      "id": "collaboration_pattern.capture",
+      "axis_id": "collaboration_pattern",
+      "label_en": "Capture Mechanism",
+      "label_zh": "捕获机制"
+    },
+    {
+      "id": "collaboration_pattern.review",
+      "axis_id": "collaboration_pattern",
+      "label_en": "Review",
+      "label_zh": "审阅"
     },
     {
       "id": "phase.m9",

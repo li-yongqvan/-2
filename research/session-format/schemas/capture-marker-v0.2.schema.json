@@ -64,6 +64,18 @@
       ],
       "description": "Optional method dimension from 8-category taxonomy"
     },
+    "collaboration_pattern_tag": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "grilling",
+        "plan_mode",
+        "prototype",
+        "capture",
+        "review"
+      ],
+      "description": "Optional collaboration-pattern dimension, distinct from method content"
+    },
     "theme_tag": {
       "type": ["string", "null"],
       "description": "Optional technical theme"
