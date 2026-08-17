@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 // Base path can be overridden for GitHub Pages deployment (#9).
-// For local dev use '/'. For repo-root GitHub Pages use '/experience-pack/'.
+// For local dev use '/'. For GitHub Pages (docs/dual-entry/) use '/experience-pack/dual-entry/'.
 const rawBase = process.env.ASTRO_BASE || '/';
 const base = rawBase.replace(/\/$/, '') + '/';
 
