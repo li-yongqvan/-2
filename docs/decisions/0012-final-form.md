@@ -20,7 +20,7 @@
 - Claude Code skill
 - 其他
 
-当前已有一个 deployed 的双入口原型：`https://li-yongqvan.github.io/-2/dual-entry/`，但它尚未被正式定位。需要回答的核心问题是：
+当前已有一个 deployed 的双入口原型：`https://li-yongqvan.github.io/experience-pack/dual-entry/`，但它尚未被正式定位。需要回答的核心问题是：
 
 - 它是**可消费的发布产品**（继续打磨 UI/导航/搜索）？
 - 它是**人工审核的副产品**（保持原型级别，重点在数据）？
@@ -60,7 +60,7 @@
 
 ### 验收标准
 
-1. 在 `https://li-yongqvan.github.io/-2/dual-entry/` 上可输入关键词搜索。
+1. 在 `https://li-yongqvan.github.io/experience-pack/dual-entry/` 上可输入关键词搜索。
 2. 搜索结果按 capture/insight 切片展示，包含标题、摘要、所属项目/主题。
 3. 支持响应式布局。
 4. 不引入后端服务或数据库。

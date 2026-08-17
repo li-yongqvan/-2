@@ -141,7 +141,7 @@
 
 发布入口：
 
-- GitHub Pages：https://li-yongqvan.github.io/-2/
-- 双入口原型：https://li-yongqvan.github.io/-2/dual-entry/
+- GitHub Pages：https://li-yongqvan.github.io/experience-pack/
+- 双入口原型：https://li-yongqvan.github.io/experience-pack/dual-entry/
 - cyber-game Demo：https://li-yongqvan.github.io/cyber-game/
 - 发布 ticket：#9

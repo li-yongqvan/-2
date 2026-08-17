@@ -7,7 +7,7 @@
 ### v0.2 · cyber-game M8-M9 里程碑范围切片
 
 - **方法主题**：Grill-me 驱动的里程碑范围切片：从 HANDOFF 到 M8-M9 架构决策
-- **在线浏览**：https://li-yongqvan.github.io/-2/dual-entry/
+- **在线浏览**：https://li-yongqvan.github.io/experience-pack/dual-entry/
 - **课程简介**：[`packages/experience-m9-grilling-scope-slice/brief.md`](packages/experience-m9-grilling-scope-slice/brief.md)
 - **样本数据**：[`data/samples/cyber-game-m9/`](data/samples/cyber-game-m9/)
 - **目标 Demo**：https://li-yongqvan.github.io/cyber-game/
